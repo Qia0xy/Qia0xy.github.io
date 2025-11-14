@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qia0xy | 技术博客</title>
-    <!-- 外部资源引入 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Tailwind 配置 -->
     <script>
         tailwind.config = {
             theme: {
@@ -29,7 +27,6 @@
             }
         }
     </script>
-    <!-- 自定义工具类 -->
     <style type="text/tailwindcss">
         @layer utilities {
             .text-glow {
@@ -46,7 +43,6 @@
         }
     </style>
     <style>
-        /* 滚动条样式 */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -57,11 +53,6 @@
         ::-webkit-scrollbar-thumb {
             background: #00FFEE;
             border-radius: 4px;
-        }
-        /* 代码块样式 */
-        pre {
-            position: relative;
-            overflow-x: auto;
         }
         pre::before {
             content: "$";
@@ -77,10 +68,8 @@
     </style>
 </head>
 <body class="bg-hack-dark text-white font-mono bg-grid min-h-screen flex flex-col">
-    <!-- 粒子背景 -->
     <div id="particles-js" class="absolute inset-0 z-0 opacity-30"></div>
 
-    <!-- 顶部导航 -->
     <header class="relative z-10 border-b border-hack-blue/30 backdrop-blur-sm bg-hack-dark/80">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-hack-blue text-glow flex items-center">
@@ -96,29 +85,25 @@
                 <a href="#ctf" class="hover:text-hack-blue transition-colors flex items-center">
                     <i class="fa fa-shield mr-1"></i> CTF 题解
                 </a>
-                <a href="#about" class="hover:text-hack-blue transition-colors flex items-center">
-                    <i class="fa fa-user mr-1"></i> 关于我
+                <a href="#friends" class="hover:text-hack-blue transition-colors flex items-center">
+                    <i class="fa fa-link mr-1"></i> 友链
                 </a>
             </nav>
-            <!-- 移动端菜单按钮 -->
             <button id="menuBtn" class="md:hidden text-hack-blue text-xl">
                 <i class="fa fa-bars"></i>
             </button>
         </div>
-        <!-- 移动端菜单 -->
         <div id="mobileMenu" class="hidden md:hidden border-t border-hack-blue/30 backdrop-blur-sm bg-hack-dark/80">
             <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
                 <a href="#home" class="py-2 hover:text-hack-blue transition-colors">首页</a>
                 <a href="#articles" class="py-2 hover:text-hack-blue transition-colors">技术笔记</a>
                 <a href="#ctf" class="py-2 hover:text-hack-blue transition-colors">CTF 题解</a>
-                <a href="#about" class="py-2 hover:text-hack-blue transition-colors">关于我</a>
+                <a href="#friends" class="py-2 hover:text-hack-blue transition-colors">友链</a>
             </div>
         </div>
     </header>
 
-    <!-- 主内容区 -->
     <main class="relative z-10 flex-grow container mx-auto px-4 py-8">
-        <!-- 首页横幅 -->
         <section id="home" class="mb-16 flex flex-col md:flex-row items-center justify-between gap-8">
             <div class="md:w-1/2 space-y-6">
                 <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight">
@@ -132,12 +117,11 @@
                     <a href="#articles" class="px-6 py-3 bg-hack-blue/20 border border-hack-blue border-glow rounded hover:bg-hack-blue/30 transition-colors flex items-center">
                         <i class="fa fa-book mr-2"></i> 浏览技术笔记
                     </a>
-                    <a href="https://github.com/Qia0xy" target="_blank" class="px-6 py-3 bg-hack-gray/50 border border-gray-500 rounded hover:bg-hack-gray/70 transition-colors flex items-center">
-                        <i class="fa fa-github mr-2"></i> GitHub
+                    <a href="#ctf" class="px-6 py-3 bg-hack-green/20 border border-hack-green border-glow rounded hover:bg-hack-green/30 transition-colors flex items-center">
+                        <i class="fa fa-shield mr-2"></i> 查看CTF题解
                     </a>
                 </div>
             </div>
-            <!-- 代码展示框 -->
             <div class="md:w-1/2 w-full border border-hack-green border-glow rounded-lg bg-hack-dark/80 p-4 backdrop-blur-sm">
                 <div class="flex items-center mb-3 text-hack-green">
                     <i class="fa fa-code mr-2"></i> 近期代码片段
@@ -171,25 +155,24 @@ if __name__ == '__main__':
             </div>
         </section>
 
-        <!-- 技术笔记列表 -->
         <section id="articles" class="mb-16">
             <div class="flex items-center mb-8 border-b border-hack-blue/30 pb-2">
                 <i class="fa fa-file-code-o text-hack-blue text-2xl mr-3"></i>
-                <h2 class="text-2xl font-bold">技术笔记</h2>
+                <h2 class="text-2xl font-bold">技术笔记 <a href="#" class="text-sm text-hack-gray hover:text-hack-blue ml-2">查看全部 ></a></h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 笔记卡片 1 -->
+                <!-- 最新3篇技术笔记（后期替换为你的内容） -->
                 <article class="border border-hack-gray/50 rounded-lg overflow-hidden hover:border-hack-blue/70 transition-colors">
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-3">
                             <span class="text-hack-green text-sm px-2 py-1 bg-hack-green/10 rounded">ROS</span>
-                            <span class="text-gray-400 text-sm">2025-11-02</span>
+                            <span class="text-gray-400 text-sm">2025-11-10</span>
                         </div>
                         <h3 class="text-xl font-bold mb-3 hover:text-hack-blue transition-colors">
-                            <a href="#">ROS1 实现乌龟画圆完整教程</a>
+                            <a href="#">ROS2 机器人SLAM建图实战</a>
                         </h3>
                         <p class="text-gray-300 text-sm mb-4">
-                            详细讲解如何通过 ROS 话题通信控制 turtlesim 节点，设置线速度与角速度实现圆周运动，包含代码注释与运行步骤。
+                            详细讲解ROS2中使用Cartographer进行激光SLAM建图的步骤，包含环境配置、参数调优与可视化方法。
                         </p>
                         <a href="#" class="text-hack-blue hover:underline flex items-center text-sm">
                             阅读更多 <i class="fa fa-arrow-right ml-1"></i>
@@ -197,18 +180,17 @@ if __name__ == '__main__':
                     </div>
                 </article>
 
-                <!-- 笔记卡片 2 -->
                 <article class="border border-hack-gray/50 rounded-lg overflow-hidden hover:border-hack-blue/70 transition-colors">
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-3">
-                            <span class="text-hack-purple text-sm px-2 py-1 bg-hack-purple/10 rounded">CTF</span>
-                            <span class="text-gray-400 text-sm">2025-10-29</span>
+                            <span class="text-hack-purple text-sm px-2 py-1 bg-hack-purple/10 rounded">逆向工程</span>
+                            <span class="text-gray-400 text-sm">2025-11-05</span>
                         </div>
                         <h3 class="text-xl font-bold mb-3 hover:text-hack-blue transition-colors">
-                            <a href="#">强网杯2025 GoblinSEC 战队 WriteUP</a>
+                            <a href="#">IDA Pro动态调试ELF文件技巧</a>
                         </h3>
                         <p class="text-gray-300 text-sm mb-4">
-                            记录强网杯2025比赛中完成的 Misc、Crypto 方向题目，包含流量包分析、密码破解、漏洞利用等详细步骤。
+                            总结IDA Pro中动态调试Linux ELF程序的实用技巧，包含断点设置、寄存器观察与内存分析方法。
                         </p>
                         <a href="#" class="text-hack-blue hover:underline flex items-center text-sm">
                             阅读更多 <i class="fa fa-arrow-right ml-1"></i>
@@ -216,213 +198,128 @@ if __name__ == '__main__':
                     </div>
                 </article>
 
-                <!-- 笔记卡片 3 -->
                 <article class="border border-hack-gray/50 rounded-lg overflow-hidden hover:border-hack-blue/70 transition-colors">
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-3">
-                            <span class="text-hack-green text-sm px-2 py-1 bg-hack-green/10 rounded">网络安全</span>
-                            <span class="text-gray-400 text-sm">2025-09-25</span>
+                            <span class="text-hack-blue text-sm px-2 py-1 bg-hack-blue/10 rounded">网络安全</span>
+                            <span class="text-gray-400 text-sm">2025-11-01</span>
                         </div>
                         <h3 class="text-xl font-bold mb-3 hover:text-hack-blue transition-colors">
-                            <a href="#">HTB-Certified 靶机渗透测试报告</a>
+                            <a href="#">Nmap高级扫描与漏洞利用实战</a>
                         </h3>
                         <p class="text-gray-300 text-sm mb-4">
-                            详细分析 HTB Certified 靶机的渗透流程，包含 SMB 信息搜集、DACL 攻击、ESC9 证书漏洞利用等关键步骤。
+                            深入讲解Nmap脚本引擎的使用，结合Metasploit实现自动化漏洞扫描与利用，附实战案例分析。
                         </p>
                         <a href="#" class="text-hack-blue hover:underline flex items-center text-sm">
                             阅读更多 <i class="fa fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </article>
-            </div>
-            <!-- 查看更多按钮 -->
-            <div class="mt-8 text-center">
-                <a href="#" class="inline-block px-8 py-3 border border-hack-blue rounded hover:bg-hack-blue/10 transition-colors">
-                    查看全部笔记 <i class="fa fa-angle-double-right ml-1"></i>
-                </a>
             </div>
         </section>
 
-        <!-- CTF 题解专区 -->
         <section id="ctf" class="mb-16">
             <div class="flex items-center mb-8 border-b border-hack-green/30 pb-2">
                 <i class="fa fa-shield text-hack-green text-2xl mr-3"></i>
-                <h2 class="text-2xl font-bold">CTF 题解归档</h2>
+                <h2 class="text-2xl font-bold">CTF 题解 <a href="#" class="text-sm text-hack-gray hover:text-hack-green ml-2">查看全部 ></a></h2>
             </div>
-            <!-- 题解表格 -->
-            <div class="overflow-x-auto rounded-lg border border-hack-green/30">
-                <table class="w-full text-left">
-                    <thead class="bg-hack-gray/50 border-b border-hack-green/30">
-                        <tr>
-                            <th class="px-6 py-4 text-hack-green">题目名称</th>
-                            <th class="px-6 py-4 text-hack-green">比赛/平台</th>
-                            <th class="px-6 py-4 text-hack-green">题型</th>
-                            <th class="px-6 py-4 text-hack-green">发布时间</th>
-                            <th class="px-6 py-4 text-hack-green">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-hack-gray/30">
-                        <tr class="hover:bg-hack-gray/20 transition-colors">
-                            <td class="px-6 py-4">traffic2</td>
-                            <td class="px-6 py-4">河南省烟草专卖局线上CTF</td>
-                            <td class="px-6 py-4"><span class="text-hack-purple text-xs px-2 py-1 bg-hack-purple/10 rounded">Misc</span></td>
-                            <td class="px-6 py-4 text-gray-400">2025-07-03</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-hack-blue hover:underline">查看题解</a>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-hack-gray/20 transition-colors">
-                            <td class="px-6 py-4">zeroshell_1</td>
-                            <td class="px-6 py-4">2024 CISCN&长城杯</td>
-                            <td class="px-6 py-4"><span class="text-hack-blue text-xs px-2 py-1 bg-hack-blue/10 rounded">Web</span></td>
-                            <td class="px-6 py-4 text-gray-400">2024-12-16</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-hack-blue hover:underline">查看题解</a>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-hack-gray/20 transition-colors">
-                            <td class="px-6 py-4">Classics</td>
-                            <td class="px-6 py-4">2024强网杯青少年专项赛</td>
-                            <td class="px-6 py-4"><span class="text-hack-green text-xs px-2 py-1 bg-hack-green/10 rounded">Crypto</span></td>
-                            <td class="px-6 py-4 text-gray-400">2024-11-25</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-hack-blue hover:underline">查看题解</a>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-hack-gray/20 transition-colors">
-                            <td class="px-6 py-4">Unsafe Parameters</td>
-                            <td class="px-6 py-4">2025第八届强网拟态赛</td>
-                            <td class="px-6 py-4"><span class="text-hack-green text-xs px-2 py-1 bg-hack-green/10 rounded">Crypto</span></td>
-                            <td class="px-6 py-4 text-gray-400">2025-11-07</td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="text-hack-blue hover:underline">查看题解</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 最新3篇CTF题解（后期替换为你的内容） -->
+                <article class="border border-hack-gray/50 rounded-lg overflow-hidden hover:border-hack-green/70 transition-colors">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-hack-purple text-sm px-2 py-1 bg-hack-purple/10 rounded">Misc</span>
+                            <span class="text-gray-400 text-sm">2025-11-08</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 hover:text-hack-green transition-colors">
+                            <a href="#">2025蓝帽杯Misc隐写题解</a>
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            解析蓝帽杯Misc题目中的音频隐写与二维码拼接技巧，包含工具使用与脚本编写过程。
+                        </p>
+                        <a href="#" class="text-hack-green hover:underline flex items-center text-sm">
+                            阅读更多 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="border border-hack-gray/50 rounded-lg overflow-hidden hover:border-hack-green/70 transition-colors">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-hack-blue text-sm px-2 py-1 bg-hack-blue/10 rounded">Web</span>
+                            <span class="text-gray-400 text-sm">2025-11-03</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 hover:text-hack-green transition-colors">
+                            <a href="#">某CTF平台SQL注入绕过WAF实战</a>
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            详细分析SQL注入绕过WAF的多种方法，包括编码绕过、注释混淆与时间盲注脚本实现。
+                        </p>
+                        <a href="#" class="text-hack-green hover:underline flex items-center text-sm">
+                            阅读更多 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="border border-hack-gray/50 rounded-lg overflow-hidden hover:border-hack-green/70 transition-colors">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-hack-green text-sm px-2 py-1 bg-hack-green/10 rounded">Crypto</span>
+                            <span class="text-gray-400 text-sm">2025-10-28</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 hover:text-hack-green transition-colors">
+                            <a href="#">RSA低加密指数攻击详细分析</a>
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            深入讲解RSA低加密指数攻击的原理，结合Python实现明文恢复脚本，并附CTF实战案例。
+                        </p>
+                        <a href="#" class="text-hack-green hover:underline flex items-center text-sm">
+                            阅读更多 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- 关于我 -->
-        <section id="about">
+        <section id="friends" class="mb-16">
             <div class="flex items-center mb-8 border-b border-hack-purple/30 pb-2">
-                <i class="fa fa-user text-hack-purple text-2xl mr-3"></i>
-                <h2 class="text-2xl font-bold">关于我</h2>
+                <i class="fa fa-link text-hack-purple text-2xl mr-3"></i>
+                <h2 class="text-2xl font-bold">友链</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="md:col-span-1">
-                    <div class="border border-hack-purple/30 rounded-lg p-6 bg-hack-dark/80 backdrop-blur-sm">
-                        <div class="flex justify-center mb-4">
-                            <div class="w-32 h-32 rounded-full border border-hack-purple border-glow flex items-center justify-center">
-                                <i class="fa fa-user-circle-o text-6xl text-hack-purple"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-center mb-2">Qia0xy</h3>
-                        <p class="text-gray-400 text-center mb-6">CTF 爱好者 & ROS 开发者</p>
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <i class="fa fa-envelope text-hack-purple w-6"></i>
-                                <span class="text-gray-300">qia0xy@example.com</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fa fa-github text-hack-purple w-6"></i>
-                                <a href="https://github.com/Qia0xy" target="_blank" class="text-gray-300 hover:text-hack-purple transition-colors">github.com/Qia0xy</a>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fa fa-map-marker text-hack-purple w-6"></i>
-                                <span class="text-gray-300">中国 · 北京</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:col-span-2">
-                    <div class="border border-hack-gray/50 rounded-lg p-6 mb-6">
-                        <h3 class="text-xl font-bold mb-4 text-hack-purple">个人简介</h3>
-                        <p class="text-gray-300 mb-4">
-                            专注于网络安全与机器人技术领域，热衷于 CTF 比赛与开源项目贡献。熟悉 Web 渗透、逆向工程、密码学等方向，
-                            同时在 ROS 开发、机器人运动控制方面有实践经验，擅长将技术理论转化为实际应用。
-                        </p>
-                        <p class="text-gray-300">
-                            本博客用于记录学习过程中的技术难点、解题思路与代码实现，希望能为同领域学习者提供参考，也欢迎大家交流讨论。
-                        </p>
-                    </div>
-                    <!-- 技能栈 -->
-                    <div class="border border-hack-gray/50 rounded-lg p-6">
-                        <h3 class="text-xl font-bold mb-4 text-hack-purple">技能栈</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-code text-hack-blue text-2xl mb-2"></i>
-                                <p class="text-sm">Python/C++</p>
-                            </div>
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-shield text-hack-green text-2xl mb-2"></i>
-                                <p class="text-sm">Web 渗透</p>
-                            </div>
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-cogs text-hack-purple text-2xl mb-2"></i>
-                                <p class="text-sm">ROS 开发</p>
-                            </div>
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-terminal text-hack-blue text-2xl mb-2"></i>
-                                <p class="text-sm">Linux 运维</p>
-                            </div>
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-database text-hack-green text-2xl mb-2"></i>
-                                <p class="text-sm">SQL 注入</p>
-                            </div>
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-lock text-hack-purple text-2xl mb-2"></i>
-                                <p class="text-sm">密码学</p>
-                            </div>
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-bug text-hack-blue text-2xl mb-2"></i>
-                                <p class="text-sm">漏洞利用</p>
-                            </div>
-                            <div class="bg-hack-gray/30 rounded p-3 text-center">
-                                <i class="fa fa-robot text-hack-green text-2xl mb-2"></i>
-                                <p class="text-sm">机器人控制</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- 友链模块（后期替换为朋友的链接） -->
+                <a href="https://example.com" target="_blank" class="border border-hack-purple/30 rounded-lg p-4 text-center hover:bg-hack-purple/10 transition-colors">
+                    <div class="text-hack-purple text-xl mb-2">朋友A</div>
+                    <p class="text-gray-400 text-sm">技术博客</p>
+                </a>
+                <a href="https://example.com" target="_blank" class="border border-hack-purple/30 rounded-lg p-4 text-center hover:bg-hack-purple/10 transition-colors">
+                    <div class="text-hack-purple text-xl mb-2">朋友B</div>
+                    <p class="text-gray-400 text-sm">CTF战队</p>
+                </a>
+                <a href="https://example.com" target="_blank" class="border border-hack-purple/30 rounded-lg p-4 text-center hover:bg-hack-purple/10 transition-colors">
+                    <div class="text-hack-purple text-xl mb-2">朋友C</div>
+                    <p class="text-gray-400 text-sm">ROS开发</p>
+                </a>
+                <a href="https://example.com" target="_blank" class="border border-hack-purple/30 rounded-lg p-4 text-center hover:bg-hack-purple/10 transition-colors">
+                    <div class="text-hack-purple text-xl mb-2">朋友D</div>
+                    <p class="text-gray-400 text-sm">网络安全</p>
+                </a>
             </div>
         </section>
     </main>
 
-    <!-- 页脚 -->
     <footer class="relative z-10 border-t border-hack-blue/30 backdrop-blur-sm bg-hack-dark/80 py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <p class="text-gray-400 text-sm">© 2025 Qia0xy's Blog. All Rights Reserved.</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://github.com/Qia0xy" target="_blank" class="text-gray-400 hover:text-hack-blue transition-colors text-xl">
-                        <i class="fa fa-github"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-hack-blue transition-colors text-xl">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-hack-blue transition-colors text-xl">
-                        <i class="fa fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-hack-blue transition-colors text-xl">
-                        <i class="fa fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 Qia0xy's Blog. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- 脚本 -->
     <script>
-        // 移动端菜单切换
         document.getElementById('menuBtn').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('hidden');
         });
 
-        // 粒子背景初始化
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
@@ -462,7 +359,6 @@ if __name__ == '__main__':
             "retina_detect": true
         });
 
-        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -473,7 +369,6 @@ if __name__ == '__main__':
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    // 关闭移动端菜单
                     document.getElementById('mobileMenu').classList.add('hidden');
                 }
             });
