@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Qia0xy&#39;s Blog</title>
+  
+  <subtitle>记录ctf,渗透测试等技能的学习过程，</subtitle>
+  <link href="https://qia0xy.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://qia0xy.github.io/"/>
+  <updated>2025-11-22T07:31:12.749Z</updated>
+  <id>https://qia0xy.github.io/</id>
+  
+  <author>
+    <name>Qia0xy</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【陇剑杯 2023】IR（一）应急响应分析</title>
+    <link href="https://qia0xy.github.io/2025/11/22/%E3%80%90%E9%99%87%E5%89%91%E6%9D%AF-2023%E3%80%91IR/"/>
+    <id>https://qia0xy.github.io/2025/11/22/%E3%80%90%E9%99%87%E5%89%91%E6%9D%AF-2023%E3%80%91IR/</id>
+    <published>2025-11-22T01:00:45.000Z</published>
+    <updated>2025-11-22T07:31:12.749Z</updated>
+    
+    <content type="html"><![CDATA[<p>附件是ova形式的文件，OVA 文件是虚拟环境的 “完整快照”，包含了虚拟机的所有数据痕迹，是数字取证中重要的分析载体。通过解析其虚拟磁盘和配置文件，可还原用户操作、系统活动及潜在的恶意行为，为案件调查提供关键证据。</p><p>OVA 文件的取证核心是对其包含的虚拟磁盘文件（如.vmdk）和配置文件（.ovf）进行解析，提取与案件相关的证据。<br>PS：如果题目没有明确的说是系统应急响应还是网络服务器应急响应，就用基本思路：先看bash的命令历史记录，混个眼熟，然后根据其中的动作继续检索</p><h2><span id="题目">题目</span></h2><p>直接用虚拟机打开，虚拟机账号密码为：root&#x2F;IncidentResponsePasswd）</p><div align="center"><img src="./1.png" alt width="80%"><br><em>题目</em></div><p>.viminfo 是 Vim 编辑器的历史配置&#x2F;记录文件，是定位挖矿程序路径的核心线索文件。</p><p>使用cat .viminfo命令查看，发现不能上下翻页。</p><div align="center"><img src="./2.png" alt="cat命令查看viminfo" width="80%"><br><em>使用cat命令查看.viminfo文件</em></div><p>使用more或者less进行查看，我这里使用的less。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">less .viminfo</span><br></pre></td></tr></table></figure><div align="center"><img src="./3.png" alt width="80%"><br><em>.viminfo文件内容</em></div><p>发现好多都是对redis的操作，执行cat &#x2F;etc&#x2F;redis&#x2F;redis.sh，脚本内容指向挖矿程序可执行文件：&#x2F;etc&#x2F;redis&#x2F;redis-server（伪装成 Redis 服务，是挖矿木马常见手段）。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/redis/redis.sh</span><br></pre></td></tr></table></figure><div align="center"><img src="./4.png" alt="挖矿脚本内容" width="80%"><br><em>redis.sh脚本指向挖矿程序</em></div><p>执行ls -l &#x2F;etc&#x2F;redis&#x2F;redis-server，确认权限位含x（可执行），证明其为挖矿程序主体。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /etc/redis/redis-server</span><br></pre></td></tr></table></figure><div align="center"><img src="./5.png" alt="确认挖矿程序权限" width="80%"><br><em>确认挖矿程序权限</em></div><p>计算路径的 MD5 值(- echo -n：输出指定字符串;- md5sum：计算字符串&#x2F;文件的 MD5 哈希值；- cut -d ‘ ‘ -f1：按空格分割md5sum的输出，只取第 1 列。)</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> -n <span class="string">&#x27;/etc/redis/redis-server&#x27;</span> | <span class="built_in">md5sum</span> | <span class="built_in">cut</span> -d <span class="string">&#x27; &#x27;</span> -f1</span><br></pre></td></tr></table></figure><p>注意：-n 不能省略，否则会因末尾换行符导致MD5计算错误；</p><div align="center"><img src="./6.png" alt="计算路径MD5值" width="80%"><br><em>计算路径的md5值</em></div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;附件是ova形式的文件，OVA 文件是虚拟环境的 “完整快照”，包含了虚拟机的所有数据痕迹，是数字取证中重要的分析载体。通过解析其虚拟磁盘和配置文件，可还原用户操作、系统活动及潜在的恶意行为，为案件调查提供关键证据。&lt;/p&gt;
+&lt;p&gt;OVA 文件的取证核心是对其包含的虚拟磁盘</summary>
+      
+    
+    
+    
+    <category term="应急响应" scheme="https://qia0xy.github.io/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
+    
+    
+    <category term="应急响应" scheme="https://qia0xy.github.io/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
+    
+    <category term="陇剑杯" scheme="https://qia0xy.github.io/tags/%E9%99%87%E5%89%91%E6%9D%AF/"/>
+    
+    <category term="Linux取证，挖矿木马分析" scheme="https://qia0xy.github.io/tags/Linux%E5%8F%96%E8%AF%81%EF%BC%8C%E6%8C%96%E7%9F%BF%E6%9C%A8%E9%A9%AC%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="慢品人间烟火色，闲观万事岁月长"><meta name="theme-color" content="#2d4356"><title>【陇剑杯 2023】IR（一）应急响应分析 | Qia0xy's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.png"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Qia0xy's Blog" type="application/atom+xml">
+</head><link rel="stylesheet" type="text/css" href="/plugins/highlight/atom-one-dark.min.css"><script type="text/javascript" src="/plugins/highlight/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();
+</script><script type="text/javascript" src="/js/ready.js" async></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"><body class="night"><div class="mobile-head" id="mobile-head"><div class="navbar-icon"><span></span><span></span><span></span></div><div class="navbar-title"><a href="/">LITREILY</a></div><div class="navbar-search"><!--= show a circle here--></div></div><div class="h-wrapper" id="menu"><nav class="h-head box"><div class="m-hdimg"><a class="hdimg img" href="/"><img class="nofancybox" src="/img/1.png" width="128" height="128"></a><h1 class="ttl"><a href="/">Qia0xy's Blog</a></h1></div><p class="m-desc">慢品人间烟火色，闲观万事岁月长</p><div class="m-nav"><ul><li><span class="dot">●</span><a href="/">主页</a></li><li><span class="dot">●</span><a href="/archives/">归档</a></li><li><span class="dot">●</span><a href="/categories/">分类</a></li><li><span class="dot">●</span><a href="/tags/">标签</a></li><li><span class="dot">●</span><a href="/about/">关于</a></li><li class="m-sch"><form class="form" id="j-formsch" method="get"><input class="txt" type="text" id="local-search-input" name="q" value="搜索" onfocus="if(this.value=='搜索'){this.value='';}" onblur="if(this.value==''){this.value='搜索';}"><input type="text" style="display:none;"></form></li></ul><div id="local-search-result"></div></div></nav></div><div id="back2Top"><a class="fa fa-arrow-up" title="Back to top" href="#"></a></div><div class="box" id="container"><div class="l-wrapper"><div class="l-content box"><div class="l-post l-post-art"><article class="p-art"><div class="p-header box"><h1 class="p-title">【陇剑杯 2023】IR（一）应急响应分析</h1><div class="p-info"><span class="p-date"><i class="fa fa-calendar"></i><a href="/2025/11/22/%E3%80%90%E9%99%87%E5%89%91%E6%9D%AF-2023%E3%80%91IR/">2025-11-22</a></span><span class="p-category"><i class="fa fa-folder"></i><a href="/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">应急响应</a></span><span class="p-view" id="busuanzi_container_page_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_page_pv"></span></span></div></div><div class="p-content"><p>附件是ova形式的文件，OVA 文件是虚拟环境的 “完整快照”，包含了虚拟机的所有数据痕迹，是数字取证中重要的分析载体。通过解析其虚拟磁盘和配置文件，可还原用户操作、系统活动及潜在的恶意行为，为案件调查提供关键证据。</p>
+<p>OVA 文件的取证核心是对其包含的虚拟磁盘文件（如.vmdk）和配置文件（.ovf）进行解析，提取与案件相关的证据。<br>PS：如果题目没有明确的说是系统应急响应还是网络服务器应急响应，就用基本思路：先看bash的命令历史记录，混个眼熟，然后根据其中的动作继续检索</p>
+<h2><span id="题目">题目</span></h2><p>直接用虚拟机打开，虚拟机账号密码为：root&#x2F;IncidentResponsePasswd）</p>
+<div align="center">
+<img src="./1.png" alt width="80%">
+<br>
+<em>题目</em>
+</div>
+
+<p>.viminfo 是 Vim 编辑器的历史配置&#x2F;记录文件，是定位挖矿程序路径的核心线索文件。</p>
+<p>使用cat .viminfo命令查看，发现不能上下翻页。</p>
+<div align="center">
+<img src="./2.png" alt="cat命令查看viminfo" width="80%">
+<br>
+<em>使用cat命令查看.viminfo文件</em>
+</div>
+
+<p>使用more或者less进行查看，我这里使用的less。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">less .viminfo</span><br></pre></td></tr></table></figure>
+<div align="center">
+<img src="./3.png" alt width="80%">
+<br>
+<em>.viminfo文件内容</em>
+</div>
+
+<p>发现好多都是对redis的操作，执行cat &#x2F;etc&#x2F;redis&#x2F;redis.sh，脚本内容指向挖矿程序可执行文件：&#x2F;etc&#x2F;redis&#x2F;redis-server（伪装成 Redis 服务，是挖矿木马常见手段）。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/redis/redis.sh</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+<img src="./4.png" alt="挖矿脚本内容" width="80%">
+<br>
+<em>redis.sh脚本指向挖矿程序</em>
+</div>
+
+<p>执行ls -l &#x2F;etc&#x2F;redis&#x2F;redis-server，确认权限位含x（可执行），证明其为挖矿程序主体。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /etc/redis/redis-server</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+<img src="./5.png" alt="确认挖矿程序权限" width="80%">
+<br>
+<em>确认挖矿程序权限</em>
+</div>
+
+<p>计算路径的 MD5 值(- echo -n：输出指定字符串;- md5sum：计算字符串&#x2F;文件的 MD5 哈希值；- cut -d ‘ ‘ -f1：按空格分割md5sum的输出，只取第 1 列。)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> -n <span class="string">&#x27;/etc/redis/redis-server&#x27;</span> | <span class="built_in">md5sum</span> | <span class="built_in">cut</span> -d <span class="string">&#x27; &#x27;</span> -f1</span><br></pre></td></tr></table></figure>
+<p>注意：-n 不能省略，否则会因末尾换行符导致MD5计算错误；</p>
+<div align="center">
+<img src="./6.png" alt="计算路径MD5值" width="80%">
+<br>
+<em>计算路径的md5值</em>
+</div></div><div class="p-copyright"><blockquote><div class="p-copyright-author"><span class="p-copyright-key">本文作者：</span><span class="p-copytight-value"><a href="mailto:litreily@163.com">Qia0xy</a></span></div><div class="p-copyright-link"><span class="p-copyright-key">本文链接：</span><span class="p-copytight-value"><a href="/2025/11/22/%E3%80%90%E9%99%87%E5%89%91%E6%9D%AF-2023%E3%80%91IR/">https://Qia0xy.github.io/2025/11/22/【陇剑杯-2023】IR/</a></span></div><div class="p-copyright-note"><span class="p-copyright-key">版权声明：</span><span class="p-copytight-value">本博客所有文章除特殊声明外，均采用<a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/"> CC BY-NC 4.0 </a>许可协议。转载请注明出处 <a href="https://Qia0xy.github.io">Qia0xy的博客</a>！</span></div></blockquote></div></article><div class="p-info box"><span class="p-tags"><i class="fa fa-tags"></i><a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">应急响应</a><a href="/tags/%E9%99%87%E5%89%91%E6%9D%AF/">陇剑杯</a><a href="/tags/Linux%E5%8F%96%E8%AF%81%EF%BC%8C%E6%8C%96%E7%9F%BF%E6%9C%A8%E9%A9%AC%E5%88%86%E6%9E%90/">Linux取证，挖矿木马分析</a></span></div><aside id="toc"><div class="toc-title">目录</div><nav><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li></ol></nav></aside></div><section class="p-ext"><div id="valine-comment"><style type="text/css">.night .v[data-class=v] a { color: #0F9FB4 !important; }
+.night .v[data-class=v] a:hover { color: #216C73 !important; }
+.night .v[data-class=v] li { list-style: inherit; }
+.night .v[data-class=v] .vwrap { border: 1px solid #223441; border-radius: 0; }
+.night .v[data-class=v] .vwrap:hover { box-shadow: 0 0 6px 1px #223441; }
+.night .v[data-class=v] .vbtn { border-radius: 0; background: none; }
+.night .v[data-class=v] .vlist .vcard .vh { border-bottom-color: #293D4E; }
+.night .v[data-class=v] .vwrap .vheader .vinput { border-bottom-color: #223441; }
+.night .v[data-class=v] .vwrap .vheader .vinput:focus { border-bottom-color: #339EB4; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre,.night .v[data-class=v] .vlist .vcard .vhead .vsys { background: #203240 !important; }
+.night .v[data-class=v] code, .night .v[data-class=v] pre { color: #F0F0F0; font-size: 95%; }
+.v[data-class=v] .vcards .vcard .vh {border-bottom-color: #223441; }
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:before {background: linear-gradient(180deg,rgba(38,57,73,.4),rgba(38,57,73,.9));}
+.night .v[data-class=v] .vcards .vcard .vcontent.expand:after {background: rgba(38,57,73,.9)}
+</style><div id="vcomment"></div><script src="//cdn.bootcdn.net/ajax/libs/valine/1.4.14/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'uDKdZZ7rbqaV6H4LEJjjalRY-gzGzoHsz',
+  appKey:'KxwsF39hpZIcLP4Rsq6TfnAQ',
+  lang: 'zh-cn',
+  placeholder:'ヾﾉ≧∀≦)o Come on, say something...',
+  avatar:'/img/1.png',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></section><footer><p>Copyright © 2016 - 2025 <a href="/." rel="nofollow">Qia0xy's Blog</a> | <strong><a rel="nofollow" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></strong><br><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span></span> <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a>Theme with<a rel="nofollow" target="_blank" href="https://github.com/litreily/snark-hexo"> snark.</a></p></footer></div></div></div><script type="text/javascript" src="/js/search.js"></script><script type="text/javascript" src="/js/top.js"></script><script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+    search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.1" async></script></body></html>
