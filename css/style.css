@@ -860,93 +860,76 @@ footer {
     margin-right: -20px !important;
   }
 }
-/* 通用自动目录样式（强制展开所有层级） */
+/* 通用自动目录样式（强制展开+层级区分） */
 .toc-wrap {
-  margin: 20px 0 20px 25px;
-  padding: 15px;
-  background: #1f3140;
-  border-radius: 4px;
-  border-left: 2px solid #4a90e2;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  max-width: 280px;
+  margin: 20px 0 20px 25px !important;
+  padding: 15px !important;
+  background: #1f3140 !important;
+  border-radius: 4px !important;
+  border-left: 2px solid #4a90e2 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+  max-width: 280px !important;
 }
 
 .toc-title {
-  color: #ffffff;
-  font-size: 16px;
-  margin: 0 0 10px 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff !important;
+  font-size: 16px !important;
+  margin: 0 0 10px 0 !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 #custom-toc {
-  max-height: 800px; /* 增大目录高度，显示更多内容 */
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-height: 800px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
 #custom-toc ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  /* 强制展开所有层级，取消默认折叠 */
-  display: block !important;
-  visibility: visible !important;
-  height: auto !important;
-}
-
-#custom-toc li {
-  margin: 6px 0;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-#custom-toc a {
-  color: #b8d4e9;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  display: block;
-  padding: 2px 0;
-}
-
-#custom-toc a:hover {
-  color: #4a90e2;
-  padding-left: 2px;
-}
-
-/* 层级缩进（强制显示所有子层级） */
-#custom-toc ul ul {
-  padding-left: 15px !important;
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
   display: block !important;
 }
 
-#custom-toc ul ul ul {
-  padding-left: 30px !important;
-  display: block !important;
-}
-
-/* 一级目录（无缩进） */
+/* 1级目录（h2）：加粗+主色+无缩进 */
 #custom-toc > ul > li {
-  font-weight: 600; /* 一级标题加粗，区分层级 */
-  margin-top: 12px; /* 一级标题上下间距增大 */
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  color: #4a90e2 !important;
+  margin: 12px 0 4px 0 !important;
+  padding-left: 0 !important;
 }
 
-/* 二级目录（缩进15px） */
+#custom-toc > ul > li > a {
+  color: #4a90e2 !important;
+}
+
+/* 2级目录（h3）：常规+浅蓝+缩进15px */
 #custom-toc > ul > li > ul > li {
-  padding-left: 15px;
-  font-weight: 400; /* 二级标题不加粗 */
-  margin-top: 6px;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  color: #b8d4e9 !important;
+  padding-left: 15px !important;
+  margin: 6px 0 !important;
 }
 
-/* 修复文章内容显示（取消高度限制） */
-.p-content {
-  line-height: 1.8;
-  padding-bottom: 40px;
-  max-height: none !important; /* 取消内容高度限制 */
-  overflow: visible !important;
+#custom-toc > ul > li > ul > li > a {
+  color: #b8d4e9 !important;
 }
 
-/* 锚点跳转适配 */
-:target {
-  scroll-margin-top: 80px;
+/* 3级及以上：逐级缩进+淡色 */
+#custom-toc > ul > li > ul > li > ul > li {
+  padding-left: 30px !important;
+  color: #99a9bf !important;
+}
+
+#custom-toc > ul > li > ul > li > ul > li > a {
+  color: #99a9bf !important;
+}
+
+/* hover效果 */
+#custom-toc a:hover {
+  color: #6bb0ff !important;
+  padding-left: 2px !important;
 }
