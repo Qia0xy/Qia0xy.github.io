@@ -864,66 +864,83 @@ footer {
 /*style of toc          */
 /*----------------------*/
 #toc {
-  position: fixed;
-  min-width: 180px;
-  top: 45px;
-  left: 1220px;
-  padding: 1.5em;
-  background: #263949;
-  border-radius: 4px;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-  max-height: calc(100% - 90px);
-  overflow: auto;
-  z-index: 99;
+  position: fixed !important;
+  min-width: 180px !important;
+  top: 45px !important;
+  left: 1220px !important;
+  padding: 1.5em !important;
+  background: #263949 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5) !important;
+  max-height: calc(100% - 90px) !important;
+  overflow: auto !important;
+  z-index: 99 !important;
 }
+
 #toc .toc-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin-bottom: 15px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
-#toc .toc-nav li {
-  margin: 8px 0;
-  list-style: none;
+
+#toc .toc-nav {
+  margin: 0 !important;
+  padding: 0 !important;
 }
+
+/* 一级目录（h2）- 加粗+主色+无缩进 */
 #toc .toc-nav > ul > li {
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  margin: 12px 0 6px 0 !important;
+  padding-left: 0 !important;
 }
-#toc .toc-nav > ul > li a {
+
+#toc .toc-nav > ul > li > a {
   color: #4a90e2 !important;
   padding-left: 0 !important;
 }
+
+/* 二级目录（h3）- 常规+浅蓝+缩进15px */
 #toc .toc-nav > ul > li > ul > li {
-  font-weight: 500;
-  font-size: 14px;
-}
-#toc .toc-nav > ul > li > ul > li a {
-  color: #8cb8f0 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin: 8px 0 !important;
   padding-left: 15px !important;
 }
-#toc .toc-nav > ul > li > ul > li > ul > li {
-  font-weight: 400;
-  font-size: 13px;
+
+#toc .toc-nav > ul > li > ul > li > a {
+  color: #8cb8f0 !important;
 }
-#toc .toc-nav > ul > li > ul > li > ul > li a {
-  color: #b8d4e9 !important;
+
+/* 三级目录（h4）- 细字+淡蓝+缩进30px */
+#toc .toc-nav > ul > li > ul > li > ul > li {
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  margin: 6px 0 !important;
   padding-left: 30px !important;
 }
+
+#toc .toc-nav > ul > li > ul > li > ul > li > a {
+  color: #b8d4e9 !important;
+}
+
+/* 禁用跳转+hover效果 */
 #toc .toc-nav a {
-  color: #CECECE;
-  text-decoration: none;
-  cursor: default;
+  color: #CECECE !important;
+  text-decoration: none !important;
+  cursor: default !important;
 }
 #toc .toc-nav a:hover {
   color: #CECECE !important;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 @media print, screen and (max-width: 1380px) {
   #toc {
-    display: none;
+    display: none !important;
   }
 }
