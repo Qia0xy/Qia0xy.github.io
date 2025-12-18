@@ -861,86 +861,72 @@ footer {
   }
 }
 /*----------------------*/
-/*style of toc          */
+/* 极简目录样式（还原最初目标） */
 /*----------------------*/
 #toc {
-  position: fixed !important;
-  min-width: 180px !important;
-  top: 45px !important;
-  left: 1220px !important;
-  padding: 1.5em !important;
-  background: #263949 !important;
-  border-radius: 4px !important;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5) !important;
-  max-height: calc(100% - 90px) !important;
-  overflow: auto !important;
-  z-index: 99 !important;
+  position: fixed;
+  min-width: 180px;
+  top: 45px;
+  left: 1220px;
+  padding: 20px;
+  background: #16212b; /* 图二同款背景 */
+  border-radius: 4px;
+  box-shadow: none; /* 去掉阴影，更简洁 */
+  max-height: calc(100% - 90px);
+  overflow-y: auto;
+  z-index: 99;
 }
 
+/* 目录标题 */
 #toc .toc-title {
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  color: #fff !important;
-  margin-bottom: 15px !important;
-  padding-bottom: 10px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2d4356;
 }
 
-#toc .toc-nav {
+/* 目录容器 - 纯列表样式 */
+#toc .toc-nav ul {
+  padding-left: 0 !important;
   margin: 0 !important;
-  padding: 0 !important;
+}
+#toc .toc-nav li {
+  list-style: none !important;
+  margin: 6px 0 !important;
+  line-height: 1.5;
+}
+#toc .toc-nav a {
+  color: #b8d4e9 !important; /* 图二同款文字色 */
+  text-decoration: none !important;
+  cursor: default !important; /* 禁用点击 */
 }
 
-/* 一级目录（h2）- 加粗+主色+无缩进 */
+/* 层级区分（仅缩进，不改颜色/字体，完全匹配图二） */
+/* 一级目录 - 无缩进 */
 #toc .toc-nav > ul > li {
-  font-weight: 700 !important;
-  font-size: 15px !important;
-  margin: 12px 0 6px 0 !important;
   padding-left: 0 !important;
 }
 
-#toc .toc-nav > ul > li > a {
-  color: #4a90e2 !important;
-  padding-left: 0 !important;
-}
-
-/* 二级目录（h3）- 常规+浅蓝+缩进15px */
+/* 二级目录 - 缩进15px */
 #toc .toc-nav > ul > li > ul > li {
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  margin: 8px 0 !important;
   padding-left: 15px !important;
 }
 
-#toc .toc-nav > ul > li > ul > li > a {
-  color: #8cb8f0 !important;
-}
-
-/* 三级目录（h4）- 细字+淡蓝+缩进30px */
+/* 三级目录 - 缩进30px */
 #toc .toc-nav > ul > li > ul > li > ul > li {
-  font-weight: 400 !important;
-  font-size: 13px !important;
-  margin: 6px 0 !important;
   padding-left: 30px !important;
 }
 
-#toc .toc-nav > ul > li > ul > li > ul > li > a {
-  color: #b8d4e9 !important;
-}
-
-/* 禁用跳转+hover效果 */
-#toc .toc-nav a {
-  color: #CECECE !important;
-  text-decoration: none !important;
-  cursor: default !important;
-}
+/* 禁用hover效果 */
 #toc .toc-nav a:hover {
-  color: #CECECE !important;
-  text-decoration: none !important;
+  color: #b8d4e9 !important;
+  background: none !important;
 }
 
+/* 移动端隐藏 */
 @media print, screen and (max-width: 1380px) {
   #toc {
-    display: none !important;
+    display: none;
   }
 }
