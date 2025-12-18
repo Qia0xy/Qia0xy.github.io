@@ -925,6 +925,19 @@ footer {
   display: block !important;
 }
 
+/* 一级目录（无缩进） */
+#custom-toc > ul > li {
+  font-weight: 600; /* 一级标题加粗，区分层级 */
+  margin-top: 12px; /* 一级标题上下间距增大 */
+}
+
+/* 二级目录（缩进15px） */
+#custom-toc > ul > li > ul > li {
+  padding-left: 15px;
+  font-weight: 400; /* 二级标题不加粗 */
+  margin-top: 6px;
+}
+
 /* 修复文章内容显示（取消高度限制） */
 .p-content {
   line-height: 1.8;
