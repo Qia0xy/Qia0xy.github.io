@@ -1,125 +1,111 @@
 /**
- * 文章目录（TOC）核心功能
- * 包含：目录高亮、滚动定位、移动端目录切换
+ * 文章目录核心功能：
+ * 1. 目录点击平滑跳转至对应标题
+ * 2. 滚动页面自动高亮当前章节
+ * 3. 兼容所有层级标题（h2/h3/h4）
+ * 4. 修复跳转偏移/激活态失效问题
  */
 document.addEventListener('DOMContentLoaded', function() {
-  // ===================== 基础配置 =====================
-  const tocConfig = {
-    tocSelector: '#toc',          // 目录容器
-    linkSelector: '#toc a',       // 目录链接
-    activeClass: 'toc-active',    // 激活状态类名
-    offsetTop: 80,                // 锚点偏移（适配顶部导航）
-    mobileBreakpoint: 768         // 移动端断点
-  };
+    // ========== 核心配置 ==========
+    const config = {
+        tocSelector: '#toc',          // 目录容器
+        navSelector: '.toc-nav',      // 目录导航容器
+        linkSelector: 'a',            // 目录链接
+        contentSelector: '.p-content',// 文章内容容器
+        activeClass: 'toc-active',    // 激活态类名
+        offsetTop: 80,                // 跳转偏移（适配顶部导航）
+        scrollOffset: 90              // 滚动检测偏移
+    };
 
-  // ===================== 桌面端：目录高亮 + 滚动定位 =====================
-  function initDesktopToc() {
-    const tocLinks = document.querySelectorAll(tocConfig.linkSelector);
-    const headings = document.querySelectorAll('.p-content h2, .p-content h3, .p-content h4');
+    // ========== 初始化检查 ==========
+    const toc = document.querySelector(config.tocSelector);
+    const tocNav = toc ? toc.querySelector(config.navSelector) : null;
+    const content = document.querySelector(config.contentSelector);
     
-    // 无目录/无标题时直接返回
-    if (!tocLinks.length || !headings.length) return;
+    // 无目录/无文章内容时直接退出
+    if (!toc || !tocNav || !content) return;
 
-    // 1. 目录链接点击事件（平滑滚动）
-    tocLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').replace('#', '');
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-          // 平滑滚动到目标位置（偏移适配）
-          window.scrollTo({
-            top: targetElement.offsetTop - tocConfig.offsetTop,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
+    // ========== 获取元素 ==========
+    // 目录链接列表
+    const tocLinks = Array.from(tocNav.querySelectorAll(config.linkSelector));
+    // 文章内标题列表（h2/h3/h4）
+    const headings = Array.from(content.querySelectorAll('h2, h3, h4'));
 
-    // 2. 滚动时高亮当前目录
-    function highlightCurrentToc() {
-      let currentId = '';
-      
-      // 遍历标题，判断当前视口内的标题
-      headings.forEach(heading => {
-        const headingTop = heading.offsetTop - tocConfig.offsetTop - 20;
-        if (window.scrollY >= headingTop) {
-          currentId = heading.getAttribute('id');
-        }
-      });
+    // 无标题/无目录链接时退出
+    if (tocLinks.length === 0 || headings.length === 0) return;
 
-      // 移除所有激活状态，给当前标题对应目录添加激活态
-      tocLinks.forEach(link => {
-        link.classList.remove(tocConfig.activeClass);
-        if (link.getAttribute('href') === `#${currentId}`) {
-          link.classList.add(tocConfig.activeClass);
-        }
-      });
+    // ========== 1. 修复目录点击跳转 ==========
+    function bindTocClick() {
+        tocLinks.forEach(link => {
+            // 只处理锚点链接
+            if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', function(e) {
+                    // 阻止默认跳转（避免锚点闪烁）
+                    e.preventDefault();
+                    
+                    // 获取目标标题ID（去掉#号）
+                    const targetId = this.getAttribute('href').replace('#', '');
+                    const targetHeading = document.getElementById(targetId);
+                    
+                    if (targetHeading) {
+                        // 平滑滚动到目标位置（偏移适配顶部导航）
+                        window.scrollTo({
+                            top: targetHeading.offsetTop - config.offsetTop,
+                            behavior: 'smooth' // 平滑滚动
+                        });
+                    }
+                });
+            }
+        });
     }
 
-    // 滚动事件监听（节流优化）
-    let scrollTimer = null;
-    window.addEventListener('scroll', function() {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(highlightCurrentToc, 50);
-    });
+    // ========== 2. 修复滚动激活态高亮 ==========
+    function updateActiveToc() {
+        // 当前滚动位置（加偏移，提前激活下一个标题）
+        const scrollPosition = window.scrollY + config.scrollOffset;
+        let activeHeadingId = '';
 
-    // 初始化高亮
-    highlightCurrentToc();
-  }
+        // 遍历标题，找到当前视口内的标题
+        headings.forEach(heading => {
+            const headingTop = heading.offsetTop;
+            // 标题顶部进入视口时，标记为当前激活标题
+            if (headingTop <= scrollPosition) {
+                activeHeadingId = heading.getAttribute('id');
+            }
+        });
 
-  // ===================== 移动端：目录切换 + 交互 =====================
-  function initMobileToc() {
-    const toggleBtn = document.querySelector('.toc-toggle');
-    const toc = document.querySelector(tocConfig.tocSelector);
-    const overlay = document.querySelector('.toc-overlay');
-    
-    // 无移动端元素时返回
-    if (!toggleBtn || !toc || !overlay) return;
-
-    // 1. 切换目录显示/隐藏
-    function toggleToc() {
-      toc.classList.toggle('toc-visible');
-      overlay.classList.toggle('visible');
-      // 显示目录时禁止页面滚动，隐藏时恢复
-      document.body.style.overflow = toc.classList.contains('toc-visible') ? 'hidden' : '';
+        // 移除所有激活态，给当前标题添加激活态
+        tocLinks.forEach(link => {
+            link.classList.remove(config.activeClass);
+            // 匹配当前激活标题的目录链接
+            if (link.getAttribute('href') === `#${activeHeadingId}`) {
+                link.classList.add(config.activeClass);
+            }
+        });
     }
 
-    // 2. 绑定点击事件
-    toggleBtn.addEventListener('click', toggleToc);
-    overlay.addEventListener('click', toggleToc);
+    // ========== 3. 防抖优化（避免滚动频繁触发） ==========
+    function debounce(func, delay = 50) {
+        let timer = null;
+        return function() {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                func.apply(this, arguments);
+            }, delay);
+        };
+    }
 
-    // 3. 点击目录项后自动隐藏目录（移动端）
-    const tocLinks = document.querySelectorAll(tocConfig.linkSelector);
-    tocLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        if (window.innerWidth <= tocConfig.mobileBreakpoint) {
-          toggleToc();
-        }
-      });
-    });
+    // ========== 初始化所有功能 ==========
+    // 绑定点击跳转
+    bindTocClick();
+    // 初始化激活态
+    updateActiveToc();
+    // 绑定滚动事件（防抖优化）
+    window.addEventListener('scroll', debounce(updateActiveToc));
 
-    // 4. 窗口大小变化时适配
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > tocConfig.mobileBreakpoint) {
-        toc.classList.remove('toc-visible');
-        overlay.classList.remove('visible');
-        document.body.style.overflow = '';
-      }
-    });
-  }
+    // ========== 额外兼容：窗口大小变化重新计算 ==========
+    window.addEventListener('resize', debounce(updateActiveToc));
 
-  // ===================== 初始化所有功能 =====================
-  // 桌面端目录高亮
-  initDesktopToc();
-  
-  // 移动端目录切换（仅移动端生效）
-  if (window.innerWidth <= tocConfig.mobileBreakpoint) {
-    initMobileToc();
-  } else {
-    // 桌面端强制显示目录
-    const toc = document.querySelector(tocConfig.tocSelector);
-    if (toc) toc.style.right = 'auto';
-  }
+    // ========== 调试信息（可选，可删除） ==========
+    console.log(`[TOC] 初始化完成 - 目录链接数: ${tocLinks.length}, 标题数: ${headings.length}`);
 });
