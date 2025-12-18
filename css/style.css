@@ -865,7 +865,7 @@ footer {
 /*----------------------*/
 #toc {
   position: fixed;
-  min-width: 200px;
+  min-width: 180px;
   top: 45px;
   left: 1220px;
   padding: 1.5em;
@@ -895,7 +895,6 @@ footer {
 #toc .toc-nav > ul > li a {
   color: #4a90e2 !important;
   padding-left: 0 !important;
-  display: block;
 }
 #toc .toc-nav > ul > li > ul > li {
   font-weight: 500;
@@ -904,7 +903,6 @@ footer {
 #toc .toc-nav > ul > li > ul > li a {
   color: #8cb8f0 !important;
   padding-left: 15px !important;
-  display: block;
 }
 #toc .toc-nav > ul > li > ul > li > ul > li {
   font-weight: 400;
@@ -913,22 +911,15 @@ footer {
 #toc .toc-nav > ul > li > ul > li > ul > li a {
   color: #b8d4e9 !important;
   padding-left: 30px !important;
-  display: block;
 }
 #toc .toc-nav a {
   color: #CECECE;
   text-decoration: none;
-  transition: all 0.3s;
+  cursor: default;
 }
 #toc .toc-nav a:hover {
-  color: #6bb0ff !important;
-  padding-left: 5px !important;
-}
-#toc .toc-nav a.toc-active {
-  color: #ff6b6b !important;
-  font-weight: 600;
-  background: rgba(255, 107, 107, 0.1);
-  border-radius: 4px;
+  color: #CECECE !important;
+  text-decoration: none;
 }
 
 @media print, screen and (max-width: 1380px) {
