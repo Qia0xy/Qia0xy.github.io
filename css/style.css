@@ -842,24 +842,26 @@ footer {
 }
 
 /*----------------------*/
-/* 图二样式+Sticky固定+贴合文章框 */
+/* 完整目录样式：边框+高亮+固定+贴合文章框 */
 /*----------------------*/
 .toc-wrap {
-  margin: 20px 0 0 0 !important; /* 顶部：搜索框下方间距（图二） */
-  padding: 0 !important;
-  background: transparent !important; /* 图二透明背景 */
-  border-radius: 0 !important;
-  border-left: none !important;
-  box-shadow: none !important;
+  margin: 20px 0 0 0 !important; /* 顶部：搜索框下方间距 */
+  padding: 15px !important; /* 内边距 */
+  background: #1f3140 !important; /* 深色背景 */
+  border-radius: 4px !important; /* 圆角 */
+  border-left: 2px solid #4a90e2 !important; /* 左侧主色边框 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important; /* 阴影 */
   box-sizing: border-box !important;
   border: none !important;
-  /* 关键：Sticky固定+贴合文章框 */
+  /* 滚动固定：Sticky定位，不遮挡内容 */
   position: sticky !important;
-  top: 20px !important; /* 滚动时固定在顶部20px，不遮挡 */
-  z-index: 999 !important;
+  top: 20px !important; /* 距离顶部20px */
+  z-index: 999 !important; /* 最上层 */
   /* 宽度适配：右侧贴合文章框 */
   width: calc(100% - 20px) !important; /* 左侧栏内满宽-边距 */
   max-width: none !important;
+  /* 限制高度：避免超出视口 */
+  max-height: calc(100vh - 40px) !important;
 }
 
 .toc-title {
@@ -867,16 +869,15 @@ footer {
   font-size: 16px !important;
   margin: 0 0 10px 0 !important;
   padding-bottom: 8px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; /* 分割线 */
   font-weight: 600 !important;
 }
 
 #custom-toc {
-  max-height: calc(100vh - 120px) !important; /* 适配左侧栏高度 */
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  background: transparent !important;
-  padding-right: 10px !important; /* 右侧留边，贴合文章框 */
+  max-height: calc(100vh - 120px) !important; /* 适配高度 */
+  overflow-y: auto !important; /* 纵向滚动 */
+  overflow-x: hidden !important; /* 隐藏横向滚动 */
+  background: transparent !important; /* 透明背景 */
 }
 
 #custom-toc ul,
@@ -886,7 +887,7 @@ footer {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
-  color: #b8d4e9 !important; /* 图二默认文字色 */
+  color: #b8d4e9 !important; /* 默认文字色 */
   text-decoration: none !important;
   font-family: inherit !important;
   font-size: 13px !important;
@@ -894,13 +895,13 @@ footer {
   background: transparent !important;
   border: none !important;
   display: block !important;
-  line-height: 1.6 !important; /* 图二行高 */
+  line-height: 1.6 !important; /* 行高 */
 }
 
-/* 层级缩进（图二） */
+/* 层级缩进：逐级区分 */
 #custom-toc > ul > li {
   padding-left: 0 !important;
-  margin: 6px 0 !important;
+  margin: 8px 0 !important;
 }
 
 #custom-toc > ul > li > ul {
@@ -908,7 +909,7 @@ footer {
 }
 
 #custom-toc > ul > li > ul > li {
-  margin: 4px 0 !important;
+  margin: 6px 0 !important;
 }
 
 #custom-toc > ul > li > ul > li > ul {
@@ -916,42 +917,45 @@ footer {
 }
 
 #custom-toc > ul > li > ul > li > ul > li {
-  margin: 3px 0 !important;
+  margin: 4px 0 !important;
 }
 
-/* 高亮/hover（图二）：仅文字变色 */
+/* 高亮样式：文字变色+淡背景 */
 #custom-toc a.toc-active {
-  color: #4a90e2 !important;
-  font-weight: 600 !important;
-  background: transparent !important;
-  padding-left: 0 !important;
+  color: #4a90e2 !important; /* 高亮文字色 */
+  font-weight: 600 !important; /* 加粗 */
+  background: rgba(74, 144, 226, 0.15) !important; /* 淡背景 */
+  padding-left: 4px !important;
+  border-radius: 2px !important;
 }
 
+/* hover效果：轻微高亮 */
 #custom-toc a:hover {
-  color: #6bb0ff !important;
-  transition: all 0.2s ease !important;
+  color: #6bb0ff !important; /* hover文字色 */
+  transition: all 0.2s ease !important; /* 平滑过渡 */
 }
 
-/* 滚动条（图二）：细条+透明 */
+/* 滚动条样式：适配主题 */
 #custom-toc::-webkit-scrollbar {
-  width: 3px !important;
-  height: 3px !important;
+  width: 6px !important;
+  height: 6px !important;
 }
 
 #custom-toc::-webkit-scrollbar-track {
-  background: transparent !important;
+  background: #2d4356 !important; /* 滚动条轨道色 */
+  border-radius: 3px !important;
 }
 
 #custom-toc::-webkit-scrollbar-thumb {
-  background: #4a90e2 !important;
-  border-radius: 0 !important;
+  background: #4a90e2 !important; /* 滚动条滑块色 */
+  border-radius: 3px !important;
 }
 
-/* 辅助：隐藏右侧目录+锚点适配 */
+/* 辅助配置：隐藏右侧重复目录+锚点适配 */
 #toc {
-  display: none !important;
+  display: none !important; /* 隐藏右侧默认目录 */
 }
 
 :target {
-  scroll-margin-top: 80px !important;
+  scroll-margin-top: 80px !important; /* 锚点跳转偏移，避免被导航栏遮挡 */
 }

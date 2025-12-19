@@ -1,9 +1,5 @@
 /**
- * 目录核心功能：
- * 1. 自动补全标题ID，确保跳转生效
- * 2. 滚动时高亮页面最顶部的内容目录
- * 3. 点击目录平滑跳转
- * 4. 目录自动滚动到高亮项
+ * 目录核心功能：跳转+滚动高亮+目录自滚动
  */
 document.addEventListener('DOMContentLoaded', function() {
   // 1. 获取核心元素
@@ -13,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 2. 初始化：给无ID标题补全ID（解决跳转失效）
   headings.forEach((heading, index) => {
-    // 生成唯一ID（优先用标题文本，避免重复）
     if (!heading.id) {
-      const text = heading.textContent.trim().replace(/[\s|~|!|@|#|$|%|^|&|*]/g, '-').toLowerCase();
-      heading.id = text ? text : `toc-heading-${index}`;
+      // 生成唯一ID（基于标题文本，避免重复）
+      const cleanText = heading.textContent.trim().replace(/[\s|~|!|@|#|$|%|^|&|*]/g, '-').toLowerCase();
+      heading.id = cleanText ? cleanText : `toc-heading-${index}`;
     }
     // 同步目录链接的href（匹配标题ID）
     const headingText = heading.textContent.trim();
@@ -38,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (heading.offsetTop <= viewportTop) {
         currentTopHeading = heading;
       } else {
-        break; // 找到第一个超出视口的标题，停止遍历（提升性能）
+        break; // 找到第一个超出视口的标题，停止遍历
       }
     }
 
