@@ -842,27 +842,19 @@ footer {
 }
 
 /*----------------------*/
-/* 隐藏右侧重复目录 */
-/*----------------------*/
-#toc {
-  display: none !important; /* 隐藏右侧post-toc.pug的目录 */
-}
-
-/*----------------------*/
-/* 左侧目录样式（匹配目标） */
+/* 左侧目录（层级区分+可跳转） */
 /*----------------------*/
 .toc-wrap {
   margin: 20px 45px 20px 45px !important;
   padding: 15px !important;
-  background: #16212b !important; /* 目标背景色 */
+  background: #16212b !important;
   border-radius: 4px !important;
-  border-left: 2px solid #4a90e2 !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+  border-left: 3px solid #4a90e2 !important;
   max-width: 200px !important;
 }
 
 .toc-title {
-  color: #ffffff !important;
+  color: #fff !important;
   font-size: 18px !important;
   font-weight: 700 !important;
   margin: 0 0 15px 0 !important;
@@ -873,7 +865,6 @@ footer {
 #custom-toc {
   max-height: calc(100vh - 300px) !important;
   overflow-y: auto !important;
-  overflow-x: hidden !important;
 }
 
 #custom-toc ul {
@@ -882,7 +873,7 @@ footer {
   margin: 0 !important;
 }
 
-/* 一级目录（h2）：无缩进+加粗+浅蓝 */
+/* 一级目录（h2）：加粗+主色+无缩进 */
 #custom-toc > ul > li {
   font-weight: 700 !important;
   font-size: 14px !important;
@@ -891,15 +882,16 @@ footer {
 }
 
 #custom-toc > ul > li > a {
-  color: #8cb8f0 !important; /* 目标文字色 */
+  color: #4a90e2 !important;
   text-decoration: none !important;
-  cursor: default !important;
+  cursor: pointer !important;
+  display: block !important;
 }
 
-/* 二级目录（h3）：缩进15px+常规+浅蓝 */
+/* 二级目录（h3）：常规+浅蓝+缩进15px */
 #custom-toc > ul > li > ul > li {
   font-weight: 500 !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   padding-left: 15px !important;
   margin: 8px 0 !important;
 }
@@ -907,25 +899,41 @@ footer {
 #custom-toc > ul > li > ul > li > a {
   color: #8cb8f0 !important;
   text-decoration: none !important;
-  cursor: default !important;
+  cursor: pointer !important;
+  display: block !important;
 }
 
-/* 三级目录（h4）：缩进30px+细字+浅蓝 */
+/* 三级目录（h4）：细字+淡蓝+缩进30px */
 #custom-toc > ul > li > ul > li > ul > li {
   padding-left: 30px !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   margin: 6px 0 !important;
 }
 
 #custom-toc > ul > li > ul > li > ul > li > a {
-  color: #8cb8f0 !important;
+  color: #b8d4e9 !important;
   text-decoration: none !important;
-  cursor: default !important;
+  cursor: pointer !important;
+  display: block !important;
 }
 
-/* 禁用hover效果 */
+/* Hover/激活态（参考CSDN） */
 #custom-toc a:hover {
-  color: #8cb8f0 !important;
-  background: none !important;
-  padding-left: 0 !important;
+  color: #6bb0ff !important;
+  background: rgba(74, 144, 226, 0.1) !important;
+  padding-left: 4px !important;
+  border-radius: 2px !important;
+}
+
+#custom-toc a.toc-active {
+  color: #4a90e2 !important;
+  font-weight: 600 !important;
+  background: rgba(74, 144, 226, 0.2) !important;
+  padding-left: 4px !important;
+  border-radius: 2px !important;
+}
+
+/* 隐藏右侧目录 */
+#toc {
+  display: none !important;
 }
