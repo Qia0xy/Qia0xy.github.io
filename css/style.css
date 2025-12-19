@@ -842,10 +842,10 @@ footer {
 }
 
 /*----------------------*/
-/* 固定目录+当前位置高亮+目标样式（动态固定+贴合文章） */
+/* 强制固定目录+当前位置高亮+贴合文章（最终版） */
 /*----------------------*/
 :root {
-  --toc-top: 20px;
+  --toc-left: 20px;
 }
 
 .toc-wrap {
@@ -857,10 +857,11 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   box-sizing: border-box !important;
   border: none !important;
-  /* 动态Sticky定位：顶部在搜索下，滚动后固定 */
-  position: sticky !important;
-  top: var(--toc-top) !important; /* 动态top值，由JS控制 */
-  z-index: 999 !important; /* 确保在最上层 */
+  /* 强制fixed固定：解决滚动不固定问题 */
+  position: fixed !important;
+  top: 20px !important; /* 默认顶部20px，JS动态调整 */
+  left: var(--toc-left) !important; /* 动态左侧位置，贴合文章 */
+  z-index: 9999 !important; /* 最高层级，不被任何元素遮挡 */
   /* 宽度适配：右侧贴合文章框 */
   width: calc(100% - 10px) !important; /* 左侧栏内满宽-小边距 */
   max-width: 280px !important;

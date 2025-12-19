@@ -1,24 +1,34 @@
 /**
- * 目录核心功能：
- * 1. 动态调整目录top值（顶部在搜索下，滚动后固定）
- * 2. 自动补全标题ID，确保跳转生效
- * 3. 滚动时高亮页面最顶部的内容目录
- * 4. 点击目录平滑跳转
- * 5. 目录自动滚动到高亮项
+ * 目录核心功能（最终版）：
+ * 1. 强制固定目录位置（fixed），动态计算左/上偏移
+ * 2. 顶部在搜索框下方，滚动后固定在页面上方
+ * 3. 自动补全标题ID，确保跳转生效
+ * 4. 滚动时高亮页面最顶部的内容目录
+ * 5. 点击目录平滑跳转+目录自滚动
  */
 document.addEventListener('DOMContentLoaded', function() {
-  // ===================== 1. 动态调整目录top值 =====================
-  function adjustTocTop() {
-    // 替换为你的搜索框实际选择器（如.search-box/.search等）
-    const searchEl = document.querySelector('.search'); 
+  // ===================== 1. 动态计算目录位置（核心修复） =====================
+  function adjustTocPosition() {
+    const tocEl = document.querySelector('.toc-wrap');
+    if (!tocEl) return;
+
+    // ① 动态计算左侧位置（贴合文章框，适配左侧栏）
+    const sidebarEl = document.querySelector('.sidebar'); // 替换为你的左侧栏选择器（如.sidebar/.left-col等）
+    if (sidebarEl) {
+      const sidebarRect = sidebarEl.getBoundingClientRect();
+      document.documentElement.style.setProperty('--toc-left', `${sidebarRect.left}px`);
+    }
+
+    // ② 动态计算top值（顶部在搜索下，滚动后固定）
+    const searchEl = document.querySelector('.search'); // 替换为你的搜索框选择器
     if (searchEl) {
-      const searchHeight = searchEl.offsetHeight; // 获取搜索框高度
-      // 页面顶部时（未滚动过搜索框）：目录top=搜索框高度+20px（在搜索框下方）
-      // 滚动过搜索框后：目录top=20px（固定在页面上方）
-      if (window.scrollY < searchHeight + 20) {
-        document.documentElement.style.setProperty('--toc-top', `${searchHeight + 20}px`);
+      const searchRect = searchEl.getBoundingClientRect();
+      const searchHeight = searchRect.height;
+      // 页面顶部时：目录在搜索框下方；滚动后：固定在顶部20px
+      if (window.scrollY < searchRect.bottom + 20) {
+        tocEl.style.top = `${searchRect.bottom + 10}px`; // 搜索框下方10px
       } else {
-        document.documentElement.style.setProperty('--toc-top', '20px');
+        tocEl.style.top = '20px'; // 固定在顶部20px
       }
     }
   }
@@ -88,9 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ===================== 3. 绑定事件 =====================
-  window.addEventListener('scroll', adjustTocTop); // 滚动时调整目录top
+  // ===================== 3. 绑定事件（确保滚动/缩放都生效） =====================
+  window.addEventListener('scroll', adjustTocPosition); // 滚动时调整位置
+  window.addEventListener('resize', adjustTocPosition); // 窗口缩放时调整位置
   window.addEventListener('scroll', highlightTopHeading); // 滚动时高亮目录
-  adjustTocTop(); // 初始化：设置初始top值
-  highlightTopHeading(); // 初始化：页面加载就高亮
+  // 初始化：页面加载立即计算位置+高亮
+  adjustTocPosition();
+  highlightTopHeading();
 });
