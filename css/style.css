@@ -842,7 +842,7 @@ footer {
 }
 
 /*----------------------*/
-/* 强制重置目录所有样式（目标样式） */
+/* 固定目录+目标样式 */
 /*----------------------*/
 .toc-wrap {
   margin: 20px 0 20px 25px !important;
@@ -853,7 +853,10 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   max-width: 280px !important;
   box-sizing: border-box !important;
-  border: none !important; /* 去掉主题默认边框 */
+  border: none !important;
+  /* 关键属性：固定在页面，随父容器滚动但自身保持位置 */
+  position: sticky !important;
+  top: 20px !important; /* 距离顶部20px，避免被顶部导航遮挡 */
 }
 
 .toc-title {
@@ -862,14 +865,14 @@ footer {
   margin: 0 0 10px 0 !important;
   padding-bottom: 8px !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  font-weight: normal !important; /* 去掉主题默认加粗 */
+  font-weight: normal !important;
 }
 
 #custom-toc {
-  max-height: 800px !important;
+  max-height: calc(100vh - 80px) !important; /* 限制高度，避免超出视口 */
   overflow-y: auto !important;
   overflow-x: hidden !important;
-  background: transparent !important; /* 去掉主题默认背景 */
+  background: transparent !important;
 }
 
 #custom-toc ul,
@@ -957,7 +960,7 @@ footer {
   transition: all 0.2s ease !important;
 }
 
-/* 激活态重置（去掉主题默认蓝色块） */
+/* 激活态重置 */
 #custom-toc a.toc-active {
   background: transparent !important;
   color: #4a90e2 !important;
