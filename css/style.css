@@ -857,6 +857,12 @@ footer {
 }
 
 .toc-wrap {
+  /* 核心：强制固定在页面左侧，永不消失 */
+  position: fixed !important;
+  top: 120px !important; /* 调整为“搜索框高度+20px”，确保在搜索框下方 */
+  left: 220px !important; /* 调整左侧位置，适配你的页面布局 */
+  z-index: 99999 !important; /* 最高层级，不被任何元素遮挡 */
+  /* 保留你的原有样式 */
   margin: 0 !important;
   padding: 15px !important;
   background: #1f3140 !important;
@@ -865,11 +871,6 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   box-sizing: border-box !important;
   border: none !important;
-  /* 强制固定在页面左侧，永不消失 */
-  position: fixed !important;
-  top: 120px !important; /* 调整这个值，确保在搜索框下方 */
-  left: 20px !important; /* 左侧位置，根据你的页面调整 */
-  z-index: 99999 !important; /* 最高层级，不被遮挡 */
   width: 280px !important;
 }
 
