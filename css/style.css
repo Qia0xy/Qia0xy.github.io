@@ -842,23 +842,31 @@ footer {
 }
 
 /*----------------------*/
-/* 固定目录+当前位置高亮+目标样式 */
+/* 强制固定目录（无视任何父容器样式） */
 /*----------------------*/
 .toc-wrap {
-  margin: 20px 0 20px 25px !important;
+  margin: 0 !important;
   padding: 15px !important;
   background: #1f3140 !important;
   border-radius: 4px !important;
   border-left: 2px solid #4a90e2 !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
-  max-width: 280px !important;
+  width: 280px !important; /* 固定宽度 */
+  height: calc(100vh - 40px) !important; /* 占满视口高度（减去上下边距） */
   box-sizing: border-box !important;
   border: none !important;
-  /* 强制固定位置 */
-  position: fixed !important;
+  /* 关键：绝对定位+固定在左侧 */
+  position: absolute !important;
   top: 20px !important;
   left: 20px !important;
-  z-index: 999 !important; /* 确保在最上层 */
+  z-index: 9999 !important; /* 最高层级，不被任何元素遮挡 */
+}
+
+#custom-toc {
+  height: calc(100% - 40px) !important; /* 减去标题高度 */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: transparent !important;
 }
 
 .toc-title {
@@ -870,13 +878,6 @@ footer {
   font-weight: 600 !important;
 }
 
-#custom-toc {
-  max-height: calc(100vh - 80px) !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  background: transparent !important;
-}
-
 #custom-toc ul,
 #custom-toc li,
 #custom-toc a {
@@ -884,7 +885,7 @@ footer {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
-  color: #b8d4e9 !important; /* 默认文字色 */
+  color: #b8d4e9 !important;
   text-decoration: none !important;
   font-family: inherit !important;
   font-size: 13px !important;
@@ -894,14 +895,12 @@ footer {
   display: block !important;
 }
 
-/* 层级样式：仅通过缩进区分，默认统一颜色 */
-/* 1级（h2）：无缩进 */
+/* 层级缩进 */
 #custom-toc > ul > li {
   padding-left: 0 !important;
   margin: 8px 0 !important;
 }
 
-/* 2级（h3）：缩进15px */
 #custom-toc > ul > li > ul {
   padding-left: 15px !important;
 }
@@ -910,7 +909,6 @@ footer {
   margin: 6px 0 !important;
 }
 
-/* 3级（h4）：缩进30px */
 #custom-toc > ul > li > ul > li > ul {
   padding-left: 15px !important;
 }
@@ -919,7 +917,7 @@ footer {
   margin: 4px 0 !important;
 }
 
-/* 当前位置高亮：仅当前章节显示主色+背景 */
+/* 当前位置高亮 */
 #custom-toc a.toc-active {
   color: #4a90e2 !important;
   font-weight: 600 !important;
@@ -928,13 +926,12 @@ footer {
   border-radius: 2px !important;
 }
 
-/* hover效果：仅轻微高亮 */
 #custom-toc a:hover {
   color: #6bb0ff !important;
   transition: all 0.2s ease !important;
 }
 
-/* 滚动条样式 */
+/* 滚动条 */
 #custom-toc::-webkit-scrollbar {
   width: 6px !important;
   height: 6px !important;
@@ -950,7 +947,6 @@ footer {
   border-radius: 3px !important;
 }
 
-/* 隐藏右侧目录+锚点适配 */
 #toc {
   display: none !important;
 }
