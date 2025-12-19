@@ -850,17 +850,14 @@ footer {
   top: 45px;
   left: 1220px;
   padding: 20px;
-  background: #16212b !important; /* 强制目标背景色 */
+  background: #16212b !important;
   border-radius: 4px;
   box-shadow: none;
   max-height: calc(100% - 90px);
   overflow-y: auto;
   z-index: 99;
-  box-sizing: border-box;
-  margin-right: 20px;
 }
 
-/* 目录标题（匹配目标） */
 #toc .toc-title {
   font-size: 18px;
   font-weight: 700;
@@ -870,43 +867,46 @@ footer {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 目录容器 - 强制层级缩进 */
 #toc .toc-nav ul {
   padding-left: 0 !important;
   margin: 0 !important;
 }
-#toc .toc-nav li {
+
+/* 一级目录（h2）：无缩进+加粗 */
+#toc .toc-nav > ul > li {
+  list-style: none !important;
+  margin: 12px 0 !important;
+  padding-left: 0 !important;
+}
+#toc .toc-nav > ul > li a {
+  color: #8cb8f0 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+/* 二级目录（h3）：缩进15px+常规字重 */
+#toc .toc-nav > ul > li > ul > li {
   list-style: none !important;
   margin: 8px 0 !important;
-  line-height: 1.5;
-}
-#toc .toc-nav a {
-  color: #8cb8f0 !important; /* 强制目标文字色 */
-  text-decoration: none !important;
-  cursor: default !important;
-  font-size: 14px !important;
-}
-
-/* 一级目录（无缩进） */
-#toc .toc-nav > ul > li {
-  padding-left: 0 !important;
-  font-weight: 700 !important; /* 一级目录加粗 */
-}
-
-/* 二级目录（缩进15px） */
-#toc .toc-nav > ul > li > ul > li {
   padding-left: 15px !important;
-  font-weight: 500 !important; /* 二级目录常规字重 */
 }
-
-/* 三级目录（缩进30px） */
-#toc .toc-nav > ul > li > ul > li > ul > li {
-  padding-left: 30px !important;
-  font-weight: 400 !important; /* 三级目录细字重 */
-}
-
-/* 禁用hover */
-#toc .toc-nav a:hover {
+#toc .toc-nav > ul > li > ul > li a {
   color: #8cb8f0 !important;
-  background: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+}
+
+/* 三级目录（h4）：缩进30px+细字重 */
+#toc .toc-nav > ul > li > ul > li > ul > li {
+  list-style: none !important;
+  margin: 6px 0 !important;
+  padding-left: 30px !important;
+}
+#toc .toc-nav > ul > li > ul > li > ul > li a {
+  color: #8cb8f0 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-decoration: none !important;
 }
