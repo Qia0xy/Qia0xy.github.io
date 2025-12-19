@@ -842,14 +842,10 @@ footer {
 }
 
 /*----------------------*/
-/* 强制固定目录+当前位置高亮+贴合文章（最终版） */
+/* 目录样式：顶部在搜索下 + 滚动后固定 */
 /*----------------------*/
-:root {
-  --toc-left: 20px;
-}
-
 .toc-wrap {
-  margin: 20px 0 20px 0 !important; /* 移除左侧边距，贴合文章 */
+  margin: 0 !important;
   padding: 15px !important;
   background: #1f3140 !important;
   border-radius: 4px !important;
@@ -857,14 +853,21 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   box-sizing: border-box !important;
   border: none !important;
-  /* 强制fixed固定：解决滚动不固定问题 */
+  /* 初始为sticky：顶部在搜索下；滚动后通过JS改为fixed */
+  position: sticky !important;
+  top: calc(var(--search-height) + 20px) !important; /* 初始在搜索框下方 */
+  left: 20px !important; /* 固定左侧位置（根据你的页面调整） */
+  z-index: 99999 !important;
+  width: 280px !important;
+  /* 过渡动画：切换更丝滑 */
+  transition: position 0s ease, top 0.2s ease;
+}
+
+/* 滚动后强制fixed固定 */
+.toc-wrap.fixed {
   position: fixed !important;
-  top: 20px !important; /* 默认顶部20px，JS动态调整 */
-  left: var(--toc-left) !important; /* 动态左侧位置，贴合文章 */
-  z-index: 9999 !important; /* 最高层级，不被任何元素遮挡 */
-  /* 宽度适配：右侧贴合文章框 */
-  width: calc(100% - 10px) !important; /* 左侧栏内满宽-小边距 */
-  max-width: 280px !important;
+  top: 20px !important; /* 滚动后固定在顶部20px */
+  left: 20px !important; /* 固定左侧（和上面一致） */
 }
 
 .toc-title {
@@ -890,7 +893,7 @@ footer {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
-  color: #b8d4e9 !important; /* 默认文字色 */
+  color: #b8d4e9 !important;
   text-decoration: none !important;
   font-family: inherit !important;
   font-size: 13px !important;
@@ -900,14 +903,12 @@ footer {
   display: block !important;
 }
 
-/* 层级样式：仅通过缩进区分，默认统一颜色 */
-/* 1级（h2）：无缩进 */
+/* 层级样式（原样式不变） */
 #custom-toc > ul > li {
   padding-left: 0 !important;
   margin: 8px 0 !important;
 }
 
-/* 2级（h3）：缩进15px */
 #custom-toc > ul > li > ul {
   padding-left: 15px !important;
 }
@@ -916,7 +917,6 @@ footer {
   margin: 6px 0 !important;
 }
 
-/* 3级（h4）：缩进30px */
 #custom-toc > ul > li > ul > li > ul {
   padding-left: 15px !important;
 }
@@ -925,7 +925,7 @@ footer {
   margin: 4px 0 !important;
 }
 
-/* 当前位置高亮：仅当前章节显示主色+背景 */
+/* 高亮/hover（原样式不变） */
 #custom-toc a.toc-active {
   color: #4a90e2 !important;
   font-weight: 600 !important;
@@ -934,13 +934,12 @@ footer {
   border-radius: 2px !important;
 }
 
-/* hover效果：仅轻微高亮 */
 #custom-toc a:hover {
   color: #6bb0ff !important;
   transition: all 0.2s ease !important;
 }
 
-/* 滚动条样式 */
+/* 滚动条（原样式不变） */
 #custom-toc::-webkit-scrollbar {
   width: 6px !important;
   height: 6px !important;
@@ -956,7 +955,7 @@ footer {
   border-radius: 3px !important;
 }
 
-/* 隐藏右侧目录+锚点适配 */
+/* 辅助（原样式不变） */
 #toc {
   display: none !important;
 }
