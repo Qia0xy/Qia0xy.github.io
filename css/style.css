@@ -841,17 +841,18 @@ footer {
   color: #2d4356;
 }
 
-/* 左侧目录容器（强制覆盖所有默认样式） */
+/* 左侧目录容器（保持原有宽度） */
 .toc-wrap {
   margin: 15px 0 0 0 !important;
   padding: 12px !important;
   background: #1e2a38 !important;
   border-radius: 4px !important;
   border-left: 2px solid #4a90e2 !important;
-  max-width: 100% !important;
+  max-width: 180px !important; /* 恢复原有窄宽度 */
   box-sizing: border-box !important;
 }
 
+/* 其余样式不变（层级、颜色等） */
 .toc-title {
   color: #fff !important;
   font-size: 16px !important;
@@ -876,7 +877,7 @@ footer {
   box-sizing: border-box !important;
 }
 
-/* 一级目录（h2）- 强制无缩进 */
+/* 一级目录（h2）- 无缩进 */
 #custom-toc > ul > li {
   font-weight: 700 !important;
   font-size: 13px !important;
@@ -892,7 +893,7 @@ footer {
   padding: 2px 0 !important;
 }
 
-/* 二级目录（h3）- 强制缩进12px */
+/* 二级目录（h3）- 缩进12px */
 #custom-toc > ul > li > ul {
   padding-left: 12px !important;
 }
@@ -911,9 +912,9 @@ footer {
   padding: 2px 0 !important;
 }
 
-/* 三级目录（h4）- 强制缩进24px */
+/* 三级目录（h4）- 缩进24px */
 #custom-toc > ul > li > ul > li > ul {
-  padding-left: 12px !important; /* 叠加缩进，总计24px */
+  padding-left: 12px !important; /* 叠加缩进 */
 }
 
 #custom-toc > ul > li > ul > li > ul > li {
