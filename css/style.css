@@ -842,127 +842,21 @@ footer {
 }
 
 /*----------------------*/
-/* 左侧目录：顶部在搜索下+滚动固定+布局不乱 */
+/* 强制修复：固定+高亮样式 */
 /*----------------------*/
-.l-sidebar-left {
-  float: left;
-  width: 300px;
-  margin-right: 20px;
-  position: relative;
-}
-
-.search {
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
 .toc-wrap {
-  margin: 0 !important;
-  padding: 15px !important;
-  background: #1f3140 !important;
-  border-radius: 4px !important;
-  border-left: 2px solid #4a90e2 !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
-  box-sizing: border-box !important;
-  border: none !important;
-  /* 关键：基于左侧栏sticky，顶部在搜索下，滚动后固定 */
   position: sticky !important;
   top: 20px !important;
-  z-index: 999 !important;
-  width: 100% !important;
-}
-
-.l-post.l-post-art {
-  float: left;
-  width: calc(100% - 320px);
-}
-
-.toc-title {
-  color: #ffffff !important;
-  font-size: 16px !important;
-  margin: 0 0 10px 0 !important;
-  padding-bottom: 8px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  font-weight: 600 !important;
-}
-
-#custom-toc {
-  max-height: calc(100vh - 80px) !important;
+  z-index: 9999 !important;
+  height: calc(100vh - 40px) !important;
   overflow-y: auto !important;
-  overflow-x: hidden !important;
-  background: transparent !important;
 }
 
-#custom-toc ul,
-#custom-toc li,
-#custom-toc a {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box !important;
-  color: #b8d4e9 !important;
-  text-decoration: none !important;
-  font-family: inherit !important;
-  font-size: 13px !important;
-  font-weight: 400 !important;
-  background: transparent !important;
-  border: none !important;
-  display: block !important;
-}
-
-/* 层级缩进（原样式） */
-#custom-toc > ul > li {
-  padding-left: 0 !important;
-  margin: 8px 0 !important;
-}
-
-#custom-toc > ul > li > ul {
-  padding-left: 15px !important;
-}
-
-#custom-toc > ul > li > ul > li {
-  margin: 6px 0 !important;
-}
-
-#custom-toc > ul > li > ul > li > ul {
-  padding-left: 15px !important;
-}
-
-#custom-toc > ul > li > ul > li > ul > li {
-  margin: 4px 0 !important;
-}
-
-/* 高亮/hover（恢复功能） */
-#custom-toc a.toc-active {
+.toc-wrap a.toc-active {
   color: #4a90e2 !important;
   font-weight: 600 !important;
   background: rgba(74, 144, 226, 0.15) !important;
   padding-left: 4px !important;
   border-radius: 2px !important;
-}
-
-#custom-toc a:hover {
-  color: #6bb0ff !important;
-  transition: all 0.2s ease !important;
-}
-
-/* 滚动条（原样式） */
-#custom-toc::-webkit-scrollbar {
-  width: 6px !important;
-  height: 6px !important;
-}
-
-#custom-toc::-webkit-scrollbar-track {
-  background: #2d4356 !important;
-  border-radius: 3px !important;
-}
-
-#custom-toc::-webkit-scrollbar-thumb {
-  background: #4a90e2 !important;
-  border-radius: 3px !important;
-}
-
-/* 辅助：锚点跳转适配 */
-:target {
-  scroll-margin-top: 80px !important;
+  display: block !important;
 }
