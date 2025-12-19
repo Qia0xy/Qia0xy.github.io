@@ -842,10 +842,10 @@ footer {
 }
 
 /*----------------------*/
-/* 固定目录+当前位置高亮+目标样式 */
+/* 固定目录+当前位置高亮+目标样式（仅调整布局） */
 /*----------------------*/
 .toc-wrap {
-  margin: 20px 0 20px 25px !important;
+  margin: 20px 0 20px 0 !important; /* 移除左侧边距，改为贴合文章 */
   padding: 15px !important;
   background: #1f3140 !important;
   border-radius: 4px !important;
@@ -854,11 +854,12 @@ footer {
   max-width: 280px !important;
   box-sizing: border-box !important;
   border: none !important;
-  /* 强制固定位置 */
-  position: fixed !important;
-  top: 20px !important;
-  left: 20px !important;
-  z-index: 999 !important; /* 确保在最上层 */
+  /* 调整固定逻辑：Sticky固定+贴合文章 */
+  position: sticky !important; /* 替换fixed为sticky，更友好 */
+  top: 20px !important; /* 距离顶部20px，不遮挡 */
+  z-index: 999 !important;
+  /* 关键：宽度适配+贴合文章框 */
+  width: calc(100% - 10px) !important; /* 左侧栏内满宽-小边距 */
 }
 
 .toc-title {
@@ -894,7 +895,7 @@ footer {
   display: block !important;
 }
 
-/* 层级样式：仅通过缩进区分，默认统一颜色 */
+/* 层级样式（原样式不变） */
 /* 1级（h2）：无缩进 */
 #custom-toc > ul > li {
   padding-left: 0 !important;
@@ -919,7 +920,7 @@ footer {
   margin: 4px 0 !important;
 }
 
-/* 当前位置高亮：仅当前章节显示主色+背景 */
+/* 当前位置高亮（原样式不变） */
 #custom-toc a.toc-active {
   color: #4a90e2 !important;
   font-weight: 600 !important;
@@ -928,13 +929,13 @@ footer {
   border-radius: 2px !important;
 }
 
-/* hover效果：仅轻微高亮 */
+/* hover效果（原样式不变） */
 #custom-toc a:hover {
   color: #6bb0ff !important;
   transition: all 0.2s ease !important;
 }
 
-/* 滚动条样式 */
+/* 滚动条样式（原样式不变） */
 #custom-toc::-webkit-scrollbar {
   width: 6px !important;
   height: 6px !important;
@@ -950,7 +951,7 @@ footer {
   border-radius: 3px !important;
 }
 
-/* 隐藏右侧目录+锚点适配 */
+/* 隐藏右侧目录+锚点适配（原样式不变） */
 #toc {
   display: none !important;
 }
