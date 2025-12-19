@@ -842,7 +842,7 @@ footer {
 }
 
 /*----------------------*/
-/* 固定目录+目标样式 */
+/* 固定目录+当前位置高亮+目标样式 */
 /*----------------------*/
 .toc-wrap {
   margin: 20px 0 20px 25px !important;
@@ -854,9 +854,11 @@ footer {
   max-width: 280px !important;
   box-sizing: border-box !important;
   border: none !important;
-  /* 关键属性：固定在页面，随父容器滚动但自身保持位置 */
-  position: sticky !important;
-  top: 20px !important; /* 距离顶部20px，避免被顶部导航遮挡 */
+  /* 强制固定位置 */
+  position: fixed !important;
+  top: 20px !important;
+  left: 20px !important;
+  z-index: 999 !important; /* 确保在最上层 */
 }
 
 .toc-title {
@@ -865,11 +867,11 @@ footer {
   margin: 0 0 10px 0 !important;
   padding-bottom: 8px !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  font-weight: normal !important;
+  font-weight: 600 !important;
 }
 
 #custom-toc {
-  max-height: calc(100vh - 80px) !important; /* 限制高度，避免超出视口 */
+  max-height: calc(100vh - 80px) !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
   background: transparent !important;
@@ -882,91 +884,54 @@ footer {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
-  color: inherit !important;
+  color: #b8d4e9 !important; /* 默认文字色 */
   text-decoration: none !important;
   font-family: inherit !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
   background: transparent !important;
   border: none !important;
-}
-
-/* 层级样式（严格匹配目标） */
-/* 1级（h2）：无缩进+主色+加粗 */
-#custom-toc > ul > li {
-  font-weight: 700 !important;
-  font-size: 14px !important;
-  margin: 10px 0 4px 0 !important;
-  padding-left: 0 !important;
-}
-
-#custom-toc > ul > li > a {
-  color: #4a90e2 !important;
   display: block !important;
 }
 
-/* 2级（h3）：15px缩进+浅蓝 */
+/* 层级样式：仅通过缩进区分，默认统一颜色 */
+/* 1级（h2）：无缩进 */
+#custom-toc > ul > li {
+  padding-left: 0 !important;
+  margin: 8px 0 !important;
+}
+
+/* 2级（h3）：缩进15px */
 #custom-toc > ul > li > ul {
   padding-left: 15px !important;
 }
 
 #custom-toc > ul > li > ul > li {
-  font-weight: 500 !important;
-  font-size: 13px !important;
   margin: 6px 0 !important;
 }
 
-#custom-toc > ul > li > ul > li > a {
-  color: #b8d4e9 !important;
-  display: block !important;
-}
-
-/* 3级（h4）：30px缩进+浅灰 */
+/* 3级（h4）：缩进30px */
 #custom-toc > ul > li > ul > li > ul {
   padding-left: 15px !important;
 }
 
 #custom-toc > ul > li > ul > li > ul > li {
-  font-weight: 400 !important;
-  font-size: 12px !important;
   margin: 4px 0 !important;
 }
 
-#custom-toc > ul > li > ul > li > ul > li > a {
-  color: #99a9bf !important;
-  display: block !important;
+/* 当前位置高亮：仅当前章节显示主色+背景 */
+#custom-toc a.toc-active {
+  color: #4a90e2 !important;
+  font-weight: 600 !important;
+  background: rgba(74, 144, 226, 0.15) !important;
+  padding-left: 4px !important;
+  border-radius: 2px !important;
 }
 
-/* 4级及以上：逐级缩进+减淡 */
-#custom-toc > ul > li > ul > li > ul > li > ul {
-  padding-left: 15px !important;
-}
-
-#custom-toc > ul > li > ul > li > ul > li > ul > li {
-  font-weight: 400 !important;
-  font-size: 11px !important;
-  margin: 4px 0 !important;
-}
-
-#custom-toc > ul > li > ul > li > ul > li > ul > li > a {
-  color: #7d8c9e !important;
-  display: block !important;
-}
-
-/* hover效果 */
+/* hover效果：仅轻微高亮 */
 #custom-toc a:hover {
   color: #6bb0ff !important;
-  padding-left: 2px !important;
   transition: all 0.2s ease !important;
-}
-
-/* 激活态重置 */
-#custom-toc a.toc-active {
-  background: transparent !important;
-  color: #4a90e2 !important;
-  font-weight: 700 !important;
-  padding-left: 0 !important;
-  border: none !important;
 }
 
 /* 滚动条样式 */

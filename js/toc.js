@@ -1,62 +1,53 @@
-// 等待页面完全加载
-window.onload = function() {
-  // 强制刷新目录渲染
-  setTimeout(() => {
-    const tocLinks = document.querySelectorAll('#custom-toc a');
-    const headings = document.querySelectorAll('.p-content h2, .p-content h3, .p-content h4');
-    const offsetTop = 70;
+document.addEventListener('DOMContentLoaded', function() {
+  const tocLinks = document.querySelectorAll('#custom-toc a');
+  const headings = document.querySelectorAll('.p-content h2, .p-content h3, .p-content h4');
+  const tocContainer = document.getElementById('custom-toc');
 
-    // 1. 强制给标题加ID（避免Hexo渲染遗漏）
-    headings.forEach((heading, index) => {
-      if (!heading.id) {
-        heading.id = 'toc-heading-' + index;
+  // 1. 初始化：所有目录链接默认非激活
+  tocLinks.forEach(link => link.classList.remove('toc-active'));
+
+  // 2. 滚动时高亮当前章节
+  window.addEventListener('scroll', function() {
+    const scrollPos = window.scrollY + 80; // 适配顶部偏移
+    let activeHeading = null;
+
+    // 找到当前可视区域的第一个标题
+    headings.forEach(heading => {
+      if (heading.offsetTop <= scrollPos) {
+        activeHeading = heading;
       }
-      // 同步更新目录链接的href
-      const headingText = heading.textContent.trim();
-      tocLinks.forEach(link => {
-        if (link.textContent.trim() === headingText) {
-          link.href = '#' + heading.id;
-        }
-      });
     });
 
-    // 2. 强制绑定点击跳转
-    tocLinks.forEach(link => {
-      link.onclick = function(e) {
-        e.preventDefault();
-        const targetId = this.href.split('#')[1];
-        const target = document.getElementById(targetId);
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - offsetTop,
-            behavior: 'smooth'
-          });
-        }
-      };
-    });
-
-    // 3. 强制绑定滚动激活
-    window.onscroll = function() {
-      const scrollPos = window.scrollY + offsetTop + 10;
-      let activeId = '';
-
-      headings.forEach(heading => {
-        if (heading.offsetTop <= scrollPos) {
-          activeId = heading.id;
-        }
-      });
-
+    // 高亮对应目录链接
+    if (activeHeading) {
+      const activeId = activeHeading.id;
       tocLinks.forEach(link => {
-        link.classList.remove('toc-active');
-        if (link.href.includes(activeId)) {
+        if (link.getAttribute('href') === `#${activeId}`) {
           link.classList.add('toc-active');
+          // 目录滚动到当前高亮项
+          tocContainer.scrollTop = link.offsetTop - 20;
+        } else {
+          link.classList.remove('toc-active');
         }
       });
-    };
-
-    // 初始化激活第一个目录
-    if (tocLinks.length > 0) {
-      tocLinks[0].classList.add('toc-active');
     }
-  }, 500);
-};
+  });
+
+  // 3. 目录点击跳转
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // 初始化触发一次滚动，高亮初始位置
+  window.dispatchEvent(new Event('scroll'));
+});
