@@ -842,8 +842,20 @@ footer {
 }
 
 /*----------------------*/
-/* 目录样式：顶部在搜索下 + 滚动后固定 */
+/* 目录样式：搜索框下方 + 滚动固定 + 贴合文章 */
 /*----------------------*/
+.sidebar {
+  position: relative;
+  float: left;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.search {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
 .toc-wrap {
   margin: 0 !important;
   padding: 15px !important;
@@ -853,21 +865,17 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   box-sizing: border-box !important;
   border: none !important;
-  /* 初始为sticky：顶部在搜索下；滚动后通过JS改为fixed */
+  /* 关键：sticky定位，基于侧边栏容器 */
   position: sticky !important;
-  top: calc(var(--search-height) + 20px) !important; /* 初始在搜索框下方 */
-  left: 20px !important; /* 固定左侧位置（根据你的页面调整） */
-  z-index: 99999 !important;
-  width: 280px !important;
-  /* 过渡动画：切换更丝滑 */
-  transition: position 0s ease, top 0.2s ease;
+  top: 20px !important;
+  z-index: 9999 !important;
+  width: 100% !important;
+  max-width: 280px !important;
 }
 
-/* 滚动后强制fixed固定 */
-.toc-wrap.fixed {
-  position: fixed !important;
-  top: 20px !important; /* 滚动后固定在顶部20px */
-  left: 20px !important; /* 固定左侧（和上面一致） */
+.l-post.l-post-art {
+  float: left;
+  width: calc(100% - 320px);
 }
 
 .toc-title {
@@ -903,7 +911,7 @@ footer {
   display: block !important;
 }
 
-/* 层级样式（原样式不变） */
+/* 层级缩进（原样式不变） */
 #custom-toc > ul > li {
   padding-left: 0 !important;
   margin: 8px 0 !important;
