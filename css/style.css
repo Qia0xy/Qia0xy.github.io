@@ -842,71 +842,88 @@ footer {
 }
 
 /*----------------------*/
-/*style of toc          */
+/* 左侧目录样式（匹配目标） */
 /*----------------------*/
-#toc {
-  position: fixed;
-  min-width: 180px;
-  top: 45px;
-  left: 1220px;
-  padding: 20px;
+.toc-wrap {
+  margin: 20px 45px 20px 45px !important;
+  padding: 15px !important;
   background: #16212b !important;
-  border-radius: 4px;
-  box-shadow: none;
-  max-height: calc(100% - 90px);
-  overflow-y: auto;
-  z-index: 99;
+  border-radius: 4px !important;
+  border-left: 2px solid #4a90e2 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+  max-width: 200px !important;
 }
 
-#toc .toc-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff !important;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+.toc-title {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  margin: 0 0 15px 0 !important;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-#toc .toc-nav ul {
+#custom-toc {
+  max-height: calc(100vh - 300px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+#custom-toc ul {
+  list-style: none !important;
   padding-left: 0 !important;
   margin: 0 !important;
 }
 
-/* 一级目录（h2）：无缩进+加粗 */
-#toc .toc-nav > ul > li {
-  list-style: none !important;
-  margin: 12px 0 !important;
+/* 一级目录（h2）：无缩进+加粗+浅蓝 */
+#custom-toc > ul > li {
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  margin: 12px 0 4px 0 !important;
   padding-left: 0 !important;
 }
-#toc .toc-nav > ul > li a {
+
+#custom-toc > ul > li > a {
   color: #8cb8f0 !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
   text-decoration: none !important;
+  cursor: default !important;
 }
 
-/* 二级目录（h3）：缩进15px+常规字重 */
-#toc .toc-nav > ul > li > ul > li {
-  list-style: none !important;
-  margin: 8px 0 !important;
-  padding-left: 15px !important;
-}
-#toc .toc-nav > ul > li > ul > li a {
-  color: #8cb8f0 !important;
-  font-size: 14px !important;
+/* 二级目录（h3）：缩进15px+常规+浅蓝 */
+#custom-toc > ul > li > ul > li {
   font-weight: 500 !important;
-  text-decoration: none !important;
+  font-size: 14px !important;
+  padding-left: 15px !important;
+  margin: 8px 0 !important;
 }
 
-/* 三级目录（h4）：缩进30px+细字重 */
-#toc .toc-nav > ul > li > ul > li > ul > li {
-  list-style: none !important;
-  margin: 6px 0 !important;
-  padding-left: 30px !important;
-}
-#toc .toc-nav > ul > li > ul > li > ul > li a {
+#custom-toc > ul > li > ul > li > a {
   color: #8cb8f0 !important;
-  font-size: 13px !important;
-  font-weight: 400 !important;
   text-decoration: none !important;
+  cursor: default !important;
+}
+
+/* 三级目录（h4）：缩进30px+细字+浅蓝 */
+#custom-toc > ul > li > ul > li > ul > li {
+  padding-left: 30px !important;
+  font-size: 13px !important;
+  margin: 6px 0 !important;
+}
+
+#custom-toc > ul > li > ul > li > ul > li > a {
+  color: #8cb8f0 !important;
+  text-decoration: none !important;
+  cursor: default !important;
+}
+
+/* 禁用hover效果 */
+#custom-toc a:hover {
+  color: #8cb8f0 !important;
+  background: none !important;
+  padding-left: 0 !important;
+}
+
+/* 隐藏右侧旧目录（确保无重复） */
+#toc {
+  display: none !important;
 }
