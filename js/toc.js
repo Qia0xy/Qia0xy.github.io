@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // 3. 高亮当前目录
+  // 3. 滚动高亮当前目录
   function highlightTopHeading() {
     const viewportTop = window.scrollY + 80;
     let currentTopHeading = null;
@@ -37,19 +37,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // 4. 点击跳转
+  // 4. 点击目录平滑跳转
   tocLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      const targetId = this.href.replace('#', '');
+      const targetId = this.href.split('#')[1];
       const target = document.getElementById(targetId);
       if (target) {
-        window.scrollTo({top: target.offsetTop - 80, behavior: 'smooth'});
+        window.scrollTo({
+          top: target.offsetTop - 80,
+          behavior: 'smooth'
+        });
       }
     });
   });
 
   // 绑定事件
   window.addEventListener('scroll', highlightTopHeading);
-  highlightTopHeading();
+  highlightTopHeading(); // 初始化高亮
 });

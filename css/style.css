@@ -842,13 +842,13 @@ footer {
 }
 
 /*----------------------*/
-/* 目录样式：搜索框下方 + 滚动固定 + 贴合文章 */
+/* 左侧目录：顶部在搜索下+滚动固定+布局不乱 */
 /*----------------------*/
-.sidebar {
-  position: relative;
+.l-sidebar-left {
   float: left;
   width: 300px;
   margin-right: 20px;
+  position: relative;
 }
 
 .search {
@@ -856,27 +856,20 @@ footer {
   margin-bottom: 20px;
 }
 
-/* 重置目录样式，避免布局冲突 */
 .toc-wrap {
-  /* 核心：绝对固定，不干扰页面布局 */
-  position: fixed !important;
-  top: 120px !important; /* 必须等于“搜索框高度 + 20px”（比如搜索框高80px → top: 100px） */
-  left: 20px !important; /* 左侧边距，根据你的页面调整 */
-  z-index: 99999 !important; /* 最高层级，不被遮挡 */
-  /* 保留你的样式 */
-  width: 280px !important;
+  margin: 0 !important;
   padding: 15px !important;
   background: #1f3140 !important;
   border-radius: 4px !important;
   border-left: 2px solid #4a90e2 !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
   box-sizing: border-box !important;
-  margin: 0 !important;
-}
-
-/* 修复文章区布局，避免被目录遮挡 */
-.l-post.l-post-art {
-  margin-left: 300px !important; /* 等于目录宽度 + 20px */
+  border: none !important;
+  /* 关键：基于左侧栏sticky，顶部在搜索下，滚动后固定 */
+  position: sticky !important;
+  top: 20px !important;
+  z-index: 999 !important;
+  width: 100% !important;
 }
 
 .l-post.l-post-art {
@@ -917,7 +910,7 @@ footer {
   display: block !important;
 }
 
-/* 层级缩进（原样式不变） */
+/* 层级缩进（原样式） */
 #custom-toc > ul > li {
   padding-left: 0 !important;
   margin: 8px 0 !important;
@@ -939,7 +932,7 @@ footer {
   margin: 4px 0 !important;
 }
 
-/* 高亮/hover（原样式不变） */
+/* 高亮/hover（恢复功能） */
 #custom-toc a.toc-active {
   color: #4a90e2 !important;
   font-weight: 600 !important;
@@ -953,7 +946,7 @@ footer {
   transition: all 0.2s ease !important;
 }
 
-/* 滚动条（原样式不变） */
+/* 滚动条（原样式） */
 #custom-toc::-webkit-scrollbar {
   width: 6px !important;
   height: 6px !important;
@@ -969,11 +962,7 @@ footer {
   border-radius: 3px !important;
 }
 
-/* 辅助（原样式不变） */
-#toc {
-  display: none !important;
-}
-
+/* 辅助：锚点跳转适配 */
 :target {
   scroll-margin-top: 80px !important;
 }
