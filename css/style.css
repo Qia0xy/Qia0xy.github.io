@@ -842,12 +842,19 @@ footer {
 }
 
 /*----------------------*/
+/* 隐藏右侧重复目录 */
+/*----------------------*/
+#toc {
+  display: none !important; /* 隐藏右侧post-toc.pug的目录 */
+}
+
+/*----------------------*/
 /* 左侧目录样式（匹配目标） */
 /*----------------------*/
 .toc-wrap {
   margin: 20px 45px 20px 45px !important;
   padding: 15px !important;
-  background: #16212b !important;
+  background: #16212b !important; /* 目标背景色 */
   border-radius: 4px !important;
   border-left: 2px solid #4a90e2 !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
@@ -884,7 +891,7 @@ footer {
 }
 
 #custom-toc > ul > li > a {
-  color: #8cb8f0 !important;
+  color: #8cb8f0 !important; /* 目标文字色 */
   text-decoration: none !important;
   cursor: default !important;
 }
@@ -921,9 +928,4 @@ footer {
   color: #8cb8f0 !important;
   background: none !important;
   padding-left: 0 !important;
-}
-
-/* 隐藏右侧旧目录（确保无重复） */
-#toc {
-  display: none !important;
 }
