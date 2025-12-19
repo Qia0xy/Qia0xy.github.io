@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ctfshow--信息搜集</title>
+    <url>/2025/12/17/ctfshow--%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</url>
+    <content><![CDATA[<h2><span id="web1">web1</span></h2><div align="center">
+<img src="./web1.png" alt="题目" width="80%">
+<br>
+<em>题目</em>
+</div>
+“开发注释未及时删除 ”，直接查看源码。
+<div align="center">
+<img src="./web1-1.png" alt="web1" width="80%">
+<br>
+<em>web1</em>
+</div>
+查看源码就可以获得flag。
+<div align="center">
+<img src="./web1-2.png" alt="源码" width="80%">
+<br>
+<em>源码</em>
+</div>
+
+<h2><span id="web2">web2</span></h2>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>信息搜集</tag>
+        <tag>ctfshow</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【陇剑杯 2023】IR 应急响应分析</title>
     <url>/2025/11/22/%E3%80%90%E9%99%87%E5%89%91%E6%9D%AF-2023%E3%80%91IR/</url>
     <content><![CDATA[<p>附件是ova形式的文件，OVA 文件是虚拟环境的 “完整快照”，包含了虚拟机的所有数据痕迹，是数字取证中重要的分析载体。通过解析其虚拟磁盘和配置文件，可还原用户操作、系统活动及潜在的恶意行为，为案件调查提供关键证据。</p>
@@ -96,36 +126,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ctfshow--信息搜集</title>
-    <url>/2025/12/17/ctfshow--%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</url>
-    <content><![CDATA[<h2><span id="web1">web1</span></h2><div align="center">
-<img src="./web1.png" alt="题目" width="80%">
-<br>
-<em>题目</em>
-</div>
-“开发注释未及时删除 ”，直接查看源码。
-<div align="center">
-<img src="./web1-1.png" alt="web1" width="80%">
-<br>
-<em>web1</em>
-</div>
-查看源码就可以获得flag。
-<div align="center">
-<img src="./web1-2.png" alt="源码" width="80%">
-<br>
-<em>源码</em>
-</div>
-
-<h2><span id="web2">web2</span></h2>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>信息搜集</tag>
-        <tag>ctfshow</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>信息搜集</title>
     <url>/2025/12/17/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</url>
     <content><![CDATA[<h2><span id="敏感目录">敏感目录</span></h2><h3><span id="git泄露">git泄露</span></h3><p>Git是一个开源的分布式版本控制系统，在执行git init初始化目录的时候，会在当前目录下自动创建一个.git目录，用来记录代码的变更记录等。发布代码的时候，如果没有把.git这个目录删除，就直接发布到了服务器上，攻击者就可以通过它来恢复源代码。<br>    ● 常规git泄露<br>    （1）url+&#x2F;.git&#x2F;访问。<br>    （2）或者使用scrabble或者其他工具读出源码即可<br>        .&#x2F;scrabble <a href="http://example.com/">http://example.com/</a><br>    ● git回滚<br>    （1）git会记录每次的提交的修改，在比赛中拿到的flag文件有可能是被删除或者覆盖过的，这时可以利用git reset –hard HEAD^来恢复到以前的版本<br>    （2）也可以用git log –stat查看commit修改了哪些文件，再用git diff HEAD commit-id<br>    ● git分支<br>    （1）每次提交git都会将她们串为一条时间线，这条时间线就是一条分支，git允许有多条分支，则需要的flag文件有可能不在主分支即master上，而 git log只能看到当前分支的。<br>    （2）对于获取其他的分支、tag，都可以从&#x2F;.git&#x2F;refs&#x2F;heads、&#x2F;.git&#x2F;refs&#x2F;tag里面拿到最新的commit对象id，然后就是顺着这个可以爬到parent commit<br>    （3）假设获取master，最新的commit的object id可以在&#x2F;.git&#x2F;refs&#x2F;heads&#x2F;master获取到<br>    ● 其他利用方式<br>    （1）从.git&#x2F;config可能有access_token信息， 从而访问这个用户的其他的仓库<br>    （2）在访问.git的时候有可能会返回403，此时可以试着访问.git&#x2F;config，若有文件返回则有可能存在泄露。<br>    （3）漏洞利用工具：GitHack<br>        用法示例：GitHack.py <a href="http://www.openssl.org/.git/">http://www.openssl.org/.git/</a></p>
@@ -153,11 +153,6 @@
       </tags>
   </entry>
   <entry>
-    <title>tags</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>about</title>
     <url>/about/index.html</url>
     <content><![CDATA[<p>一个正在慢慢学技术的菜鸟。</p>
@@ -166,6 +161,11 @@
   <entry>
     <title>categories</title>
     <url>/categories/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>tags</title>
+    <url>/tags/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
 </search>
