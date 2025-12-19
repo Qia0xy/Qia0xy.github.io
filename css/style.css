@@ -842,21 +842,24 @@ footer {
 }
 
 /*----------------------*/
-/* 恢复图二目录样式（保留功能） */
+/* 图二样式+Sticky固定+贴合文章框 */
 /*----------------------*/
 .toc-wrap {
-  margin: 0 !important;
+  margin: 20px 0 0 0 !important; /* 顶部：搜索框下方间距（图二） */
   padding: 0 !important;
-  background: transparent !important;
+  background: transparent !important; /* 图二透明背景 */
   border-radius: 0 !important;
   border-left: none !important;
   box-shadow: none !important;
-  max-width: none !important;
   box-sizing: border-box !important;
   border: none !important;
+  /* 关键：Sticky固定+贴合文章框 */
   position: sticky !important;
-  top: 20px !important;
+  top: 20px !important; /* 滚动时固定在顶部20px，不遮挡 */
   z-index: 999 !important;
+  /* 宽度适配：右侧贴合文章框 */
+  width: calc(100% - 20px) !important; /* 左侧栏内满宽-边距 */
+  max-width: none !important;
 }
 
 .toc-title {
@@ -869,10 +872,11 @@ footer {
 }
 
 #custom-toc {
-  max-height: calc(100vh - 80px) !important;
+  max-height: calc(100vh - 120px) !important; /* 适配左侧栏高度 */
   overflow-y: auto !important;
   overflow-x: hidden !important;
   background: transparent !important;
+  padding-right: 10px !important; /* 右侧留边，贴合文章框 */
 }
 
 #custom-toc ul,
@@ -890,12 +894,13 @@ footer {
   background: transparent !important;
   border: none !important;
   display: block !important;
+  line-height: 1.6 !important; /* 图二行高 */
 }
 
-/* 层级缩进：恢复图二样式 */
+/* 层级缩进（图二） */
 #custom-toc > ul > li {
   padding-left: 0 !important;
-  margin: 8px 0 !important;
+  margin: 6px 0 !important;
 }
 
 #custom-toc > ul > li > ul {
@@ -903,7 +908,7 @@ footer {
 }
 
 #custom-toc > ul > li > ul > li {
-  margin: 6px 0 !important;
+  margin: 4px 0 !important;
 }
 
 #custom-toc > ul > li > ul > li > ul {
@@ -911,16 +916,15 @@ footer {
 }
 
 #custom-toc > ul > li > ul > li > ul > li {
-  margin: 4px 0 !important;
+  margin: 3px 0 !important;
 }
 
-/* 高亮/交互：保留功能，样式匹配图二 */
+/* 高亮/hover（图二）：仅文字变色 */
 #custom-toc a.toc-active {
-  color: #4a90e2 !important; /* 图二高亮色 */
+  color: #4a90e2 !important;
   font-weight: 600 !important;
-  background: transparent !important; /* 图二无背景高亮 */
+  background: transparent !important;
   padding-left: 0 !important;
-  border-radius: 0 !important;
 }
 
 #custom-toc a:hover {
@@ -928,15 +932,14 @@ footer {
   transition: all 0.2s ease !important;
 }
 
-/* 滚动条：恢复图二样式 */
+/* 滚动条（图二）：细条+透明 */
 #custom-toc::-webkit-scrollbar {
-  width: 4px !important;
-  height: 4px !important;
+  width: 3px !important;
+  height: 3px !important;
 }
 
 #custom-toc::-webkit-scrollbar-track {
   background: transparent !important;
-  border-radius: 0 !important;
 }
 
 #custom-toc::-webkit-scrollbar-thumb {
