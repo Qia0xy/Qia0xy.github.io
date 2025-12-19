@@ -842,26 +842,23 @@ footer {
 }
 
 /*----------------------*/
-/* 完整目录样式：边框+高亮+固定+贴合文章框 */
+/* 固定目录+当前位置高亮+目标样式 */
 /*----------------------*/
 .toc-wrap {
-  margin: 20px 0 0 0 !important; /* 顶部：搜索框下方间距 */
-  padding: 15px !important; /* 内边距 */
-  background: #1f3140 !important; /* 深色背景 */
-  border-radius: 4px !important; /* 圆角 */
-  border-left: 2px solid #4a90e2 !important; /* 左侧主色边框 */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important; /* 阴影 */
+  margin: 20px 0 20px 25px !important;
+  padding: 15px !important;
+  background: #1f3140 !important;
+  border-radius: 4px !important;
+  border-left: 2px solid #4a90e2 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+  max-width: 280px !important;
   box-sizing: border-box !important;
   border: none !important;
-  /* 滚动固定：Sticky定位，不遮挡内容 */
-  position: sticky !important;
-  top: 20px !important; /* 距离顶部20px */
-  z-index: 999 !important; /* 最上层 */
-  /* 宽度适配：右侧贴合文章框 */
-  width: calc(100% - 20px) !important; /* 左侧栏内满宽-边距 */
-  max-width: none !important;
-  /* 限制高度：避免超出视口 */
-  max-height: calc(100vh - 40px) !important;
+  /* 强制固定位置 */
+  position: fixed !important;
+  top: 20px !important;
+  left: 20px !important;
+  z-index: 999 !important; /* 确保在最上层 */
 }
 
 .toc-title {
@@ -869,15 +866,15 @@ footer {
   font-size: 16px !important;
   margin: 0 0 10px 0 !important;
   padding-bottom: 8px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; /* 分割线 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   font-weight: 600 !important;
 }
 
 #custom-toc {
-  max-height: calc(100vh - 120px) !important; /* 适配高度 */
-  overflow-y: auto !important; /* 纵向滚动 */
-  overflow-x: hidden !important; /* 隐藏横向滚动 */
-  background: transparent !important; /* 透明背景 */
+  max-height: calc(100vh - 80px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: transparent !important;
 }
 
 #custom-toc ul,
@@ -895,15 +892,16 @@ footer {
   background: transparent !important;
   border: none !important;
   display: block !important;
-  line-height: 1.6 !important; /* 行高 */
 }
 
-/* 层级缩进：逐级区分 */
+/* 层级样式：仅通过缩进区分，默认统一颜色 */
+/* 1级（h2）：无缩进 */
 #custom-toc > ul > li {
   padding-left: 0 !important;
   margin: 8px 0 !important;
 }
 
+/* 2级（h3）：缩进15px */
 #custom-toc > ul > li > ul {
   padding-left: 15px !important;
 }
@@ -912,6 +910,7 @@ footer {
   margin: 6px 0 !important;
 }
 
+/* 3级（h4）：缩进30px */
 #custom-toc > ul > li > ul > li > ul {
   padding-left: 15px !important;
 }
@@ -920,42 +919,42 @@ footer {
   margin: 4px 0 !important;
 }
 
-/* 高亮样式：文字变色+淡背景 */
+/* 当前位置高亮：仅当前章节显示主色+背景 */
 #custom-toc a.toc-active {
-  color: #4a90e2 !important; /* 高亮文字色 */
-  font-weight: 600 !important; /* 加粗 */
-  background: rgba(74, 144, 226, 0.15) !important; /* 淡背景 */
+  color: #4a90e2 !important;
+  font-weight: 600 !important;
+  background: rgba(74, 144, 226, 0.15) !important;
   padding-left: 4px !important;
   border-radius: 2px !important;
 }
 
-/* hover效果：轻微高亮 */
+/* hover效果：仅轻微高亮 */
 #custom-toc a:hover {
-  color: #6bb0ff !important; /* hover文字色 */
-  transition: all 0.2s ease !important; /* 平滑过渡 */
+  color: #6bb0ff !important;
+  transition: all 0.2s ease !important;
 }
 
-/* 滚动条样式：适配主题 */
+/* 滚动条样式 */
 #custom-toc::-webkit-scrollbar {
   width: 6px !important;
   height: 6px !important;
 }
 
 #custom-toc::-webkit-scrollbar-track {
-  background: #2d4356 !important; /* 滚动条轨道色 */
+  background: #2d4356 !important;
   border-radius: 3px !important;
 }
 
 #custom-toc::-webkit-scrollbar-thumb {
-  background: #4a90e2 !important; /* 滚动条滑块色 */
+  background: #4a90e2 !important;
   border-radius: 3px !important;
 }
 
-/* 辅助配置：隐藏右侧重复目录+锚点适配 */
+/* 隐藏右侧目录+锚点适配 */
 #toc {
-  display: none !important; /* 隐藏右侧默认目录 */
+  display: none !important;
 }
 
 :target {
-  scroll-margin-top: 80px !important; /* 锚点跳转偏移，避免被导航栏遮挡 */
+  scroll-margin-top: 80px !important;
 }
