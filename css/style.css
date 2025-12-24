@@ -61,3 +61,19 @@
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+/* 重置文章标题与内容的间距 */
+.p-header {
+  margin-bottom: 1em !important; /* 缩小标题下方间距 */
+}
+
+.p-content {
+  margin-top: 1em !important; /* 缩小内容上方间距 */
+  line-height: 1.8 !important; /* 恢复正常行高，避免内容分散 */
+}
+
+/* 重置文章区的内外边距 */
+.l-post.l-post-art article.p-art {
+  padding: 20px !important; /* 恢复正常内边距 */
+  margin: 0 !important; /* 清除多余外边距 */
+}
