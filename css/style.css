@@ -640,7 +640,7 @@ a, .m-nav a:hover, .l-post .p-desc a:hover, .ttl a:hover, .m-nav .dot, .l-pager 
   top: 45px;
   left: 1220px;
   padding: 20px;
-  background: #16212b; /* 目标样式背景色 */
+  background: #16212b;
   border-radius: 4px;
   box-shadow: none;
   max-height: calc(100% - 90px);
@@ -650,7 +650,6 @@ a, .m-nav a:hover, .l-post .p-desc a:hover, .ttl a:hover, .m-nav .dot, .l-pager 
   margin-right: 20px;
 }
 
-/* 目录标题（匹配目标样式） */
 #toc .toc-title {
   font-size: 18px;
   font-weight: 700;
@@ -660,7 +659,6 @@ a, .m-nav a:hover, .l-post .p-desc a:hover, .ttl a:hover, .m-nav .dot, .l-pager 
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 目录容器 - 完全匹配目标样式 */
 #toc .toc-nav ul {
   padding-left: 0 !important;
   margin: 0 !important;
@@ -671,29 +669,24 @@ a, .m-nav a:hover, .l-post .p-desc a:hover, .ttl a:hover, .m-nav .dot, .l-pager 
   line-height: 1.5;
 }
 #toc .toc-nav a {
-  color: #8cb8f0 !important; /* 目标样式的浅蓝文字色 */
+  color: #8cb8f0 !important;
   text-decoration: none !important;
   cursor: default !important;
   font-size: 14px !important;
 }
 
-/* 层级区分（仅缩进，文字样式完全统一） */
-/* 一级目录 - 无缩进 */
 #toc .toc-nav > ul > li {
   padding-left: 0 !important;
 }
 
-/* 二级目录 - 缩进15px */
 #toc .toc-nav > ul > li > ul > li {
   padding-left: 15px !important;
 }
 
-/* 三级目录 - 缩进30px */
 #toc .toc-nav > ul > li > ul > li > ul > li {
   padding-left: 30px !important;
 }
 
-/* 禁用hover效果 */
 #toc .toc-nav a:hover {
   color: #8cb8f0 !important;
   background: none !important;
@@ -841,13 +834,13 @@ footer {
   color: #2d4356;
 }
 
-/* 强制固定目录，不依赖模板布局 */
+/* 左侧目录核心样式：搜索框下方+固定+不重叠 */
 .toc-wrap {
   position: fixed !important;
-  top: 100px !important; /* 手动调整为搜索框下方 */
-  left: 50px !important; /* 手动调整左侧位置 */
+  top: 200px !important; /* 调整为你的搜索框下方（根据实际高度） */
+  left: 60px !important; /* 调整左侧位置，避开头像 */
   z-index: 999999 !important;
-  width: 280px !important;
+  width: 220px !important; /* 适配你的侧边栏宽度 */
   padding: 15px !important;
   background: #1f3140 !important;
   border-left: 2px solid #4a90e2 !important;
@@ -857,15 +850,16 @@ footer {
   box-sizing: border-box !important;
 }
 
-/* 强制高亮样式 */
-.toc-active {
+/* 目录高亮样式 */
+#custom-toc a.toc-active {
   color: #4a90e2 !important;
-  font-weight: bold !important;
+  font-weight: 600 !important;
   background: rgba(74, 144, 226, 0.15) !important;
   padding-left: 4px !important;
+  border-radius: 2px !important;
 }
 
-/* 文章区避开目录，恢复布局 */
+/* 文章区布局适配 */
 .l-post.l-post-art {
-  margin-left: 350px !important;
+  margin-left: 300px !important; /* 目录宽度+间距，避免遮挡 */
 }
