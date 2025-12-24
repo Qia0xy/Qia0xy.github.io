@@ -1,121 +1,114 @@
 @charset "UTF-8";
-/* ---------------------- 全局基础样式  ---------------------- */
-* {
+/* totop button will fix on the right of post when reach below width */
+/* --- 基础重置 (保持原样) --- */
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, article {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-image: url(/img/backgroud.png);
+  background-repeat: repeat-y;
+  background-position-x: -80px;
+  word-wrap: break-word;
+  font: 12px/200% "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
+  overflow-x: hidden;
+  background-color: #2d4356;
+}
+
+/* --- 修复报错的 Mixin --- */
+blockquote {
+  box-sizing: border-box; /* 替换掉报错的 @include */
+  margin: 24px -40px;
+  padding: 0.5em 40px 0.5em 32px;
+  border-left: 8px solid #7166F7;
+  background-color: #2d4356;
+}
+
+/* --- 核心修复：文章区域与目录布局 --- */
+.l-post.l-post-art {
+  margin-left: 0 !important;
+  padding-left: 320px !important; /* 给左侧目录留出固定空间 */
+  width: 100%;
   box-sizing: border-box;
 }
 
-/* ---------------------- 左侧目录核心样式  ---------------------- */
-.toc-wrap {
+/* 恢复原主题文章框样式 */
+article.p-art {
+  position: relative;
+  max-width: 840px;
+  background: #263949;
+  padding: 40px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 修复目录(TOC)样式 - 适配 toc.js 的 #custom-toc */
+#custom-toc.toc-wrap {
   position: fixed !important;
-  top: 120px !important; /* 适配搜索框高度，确保在搜索框下方 */
-  left: 30px !important; /* 微调左侧位置，避开头像/侧边栏重叠 */
-  z-index: 999999 !important; /* 最高层级，不被任何元素遮挡 */
-  width: 280px !important; /* 固定宽度，不打乱布局 */
-  padding: 15px !important;
-  background: #1f3140 !important; /* 原有深色背景 */
-  border-left: 2px solid #4a90e2 !important; /* 左侧蓝色边框 */
-  border-radius: 4px !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important; /* 阴影效果 */
-  margin: 0 !important;
-  box-sizing: border-box !important;
+  top: 120px !important;
+  left: 40px !important;
+  width: 250px !important;
+  max-height: 80vh !important;
+  padding: 20px !important;
+  background: rgba(22, 33, 43, 0.95) !important;
+  border-left: 3px solid #0F9FB4 !important;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
-
-.toc-title {
-  color: #ffffff !important; /* 白色标题 */
-  font-size: 16px !important;
-  margin: 0 0 10px 0 !important;
-  padding-bottom: 8px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; /* 底部分隔线 */
-  font-weight: 600 !important;
+#custom-toc.toc-wrap .toc-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-#custom-toc {
-  max-height: calc(100vh - 150px) !important; /* 适配top值，避免溢出页面 */
-  overflow-y: auto !important; /* 内容超出时垂直滚动 */
-  overflow-x: hidden !important; /* 隐藏水平滚动条 */
-  background: transparent !important;
-}
-
-#custom-toc ul,
-#custom-toc li,
-#custom-toc a {
+#custom-toc.toc-wrap .toc-nav ul {
   list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box !important;
-  color: #b8d4e9 !important; /* 默认文字颜色 */
-  text-decoration: none !important; /* 去除下划线 */
-  font-size: 13px !important;
-  display: block !important; /* 独占一行 */
+  padding-left: 10px !important;
+}
+#custom-toc.toc-wrap .toc-nav li {
+  margin: 8px 0 !important;
+}
+#custom-toc.toc-wrap .toc-nav a {
+  color: #8cb8f0 !important;
+  font-size: 14px !important;
+  display: block;
+  cursor: pointer !important; /* 必须恢复 pointer 才能点击 */
+}
+#custom-toc.toc-wrap .toc-nav a:hover {
+  color: #fff !important;
+}
+#custom-toc.toc-wrap .toc-nav .toc-active {
+  color: #fff !important;
+  font-weight: bold !important;
+  background: rgba(100, 156, 217, 0.2) !important;
+  padding-left: 5px !important;
 }
 
-#custom-toc > ul > li {
-  padding-left: 0 !important;
-  margin: 8px 0 !important; /* 上下间距 */
+/* --- 恢复文章内链接可点击性 --- */
+.p-content {
+  font-size: 15px;
+}
+.p-content a {
+  color: #649cd9 !important;
+  cursor: pointer !important; /* 核心修正：取消原本的 default 限制 */
+  text-decoration: none !important;
+}
+.p-content a:hover {
+  text-decoration: underline !important;
 }
 
-#custom-toc > ul > li > ul {
-  padding-left: 15px !important; /* 缩进显示层级 */
+/* 保留原主题响应式配置 */
+@media screen and (max-width: 1200px) {
+  #custom-toc.toc-wrap {
+    display: none !important;
+  }
+  .l-post.l-post-art {
+    padding-left: 20px !important;
+  }
 }
-
-#custom-toc > ul > li > ul > li {
-  margin: 6px 0 !important;
-}
-
-#custom-toc > ul > li > ul > li > ul {
-  padding-left: 15px !important;
-}
-
-#custom-toc > ul > li > ul > li > ul > li {
-  margin: 4px 0 !important;
-}
-
-#custom-toc a.toc-active {
-  color: #4a90e2 !important; /* 高亮文字颜色 */
-  font-weight: 600 !important; /* 加粗显示 */
-  background: rgba(74, 144, 226, 0.15) !important; /* 浅蓝背景 */
-  padding-left: 4px !important;
-  border-radius: 2px !important;
-  display: inline-block !important; /* 限制高亮范围 */
-  width: 100% !important; /* 独占一行，不超出容器 */
-}
-
-#custom-toc a:hover {
-  color: #6bb0ff !important; /* 悬浮文字颜色 */
-  transition: all 0.2s ease !important; /* 平滑过渡 */
-}
-
-#custom-toc::-webkit-scrollbar {
-  width: 6px !important; /* 滚动条宽度 */
-  height: 6px !important;
-}
-
-#custom-toc::-webkit-scrollbar-track {
-  background: #2d4356 !important; /* 滚动条轨道颜色 */
-  border-radius: 3px !important;
-}
-
-#custom-toc::-webkit-scrollbar-thumb {
-  background: #4a90e2 !important; /* 滚动条滑块颜色 */
-  border-radius: 3px !important;
-}
-
-/* ---------------------- 文章区布局：避开目录，无重叠 ---------------------- */
-.l-post.l-post-art {
-  margin-left: 350px !important; /* 目录宽度(280px) + 间距(70px)，避免遮挡 */
-  box-sizing: border-box !important;
-}
-
-/* ---------------------- 锚点跳转适配：避免被顶部导航遮挡 ---------------------- */
-:target {
-  scroll-margin-top: 80px !important; /* 跳转后偏移，避开头部导航 */
-}
-
-/* ---------------------- 隐藏默认目录：只显示自定义目录 ---------------------- */
-#toc {
-  display: none !important;
-}
-
-/* ---------------------- 保留你的原有其他样式（如下可根据自身需求补充） ---------------------- */
+/* --- 继续保留原主题其他样式 (此处省略已有的 archive/tag 样式) --- */
