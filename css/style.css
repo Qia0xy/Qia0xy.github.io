@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/* 仅保留 Snark 蓝色深色主题的目录样式，无冲突代码 */
+.h-wrapper .toc-wrap {
+  padding: 15px 45px; /* 匹配 Snark 侧边栏原生缩进 */
+  margin: 20px 0; /* 与导航/搜索框保持原生间距 */
+  background: #1f3140; /* Snark 原生深色背景 */
+  border-left: 2px solid #4a90e2; /* Snark 主题标志性蓝色 */
+  border-radius: 4px; /* 匹配 Snark 原生圆角样式 */
+}
+
+.toc-title {
+  font-size: 16px; /* 匹配 Snark 侧边栏文字大小 */
+  color: #fff; /* 白色标题，适配深色背景 */
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 浅色分隔线，Snark 风格 */
+}
+
+#custom-toc ul,
+#custom-toc li,
+#custom-toc a {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #b8d4e9; /* Snark 原生浅色文字，适配深色背景 */
+  text-decoration: none;
+  font-size: 13px; /* 匹配 Snark 侧边栏小字大小 */
+}
+
+#custom-toc > ul > li {
+  margin: 8px 0; /* 目录项间距，Snark 风格 */
+}
+
+#custom-toc > ul > li > ul {
+  padding-left: 15px; /* 目录层级缩进，Snark 风格 */
+}
+
+#custom-toc a.toc-active {
+  color: #4a90e2; /* 高亮色匹配 Snark 主题蓝色 */
+  font-weight: 600;
+  background: rgba(74, 144, 226, 0.15); /* 浅蓝高亮背景，不刺眼 */
+  padding-left: 4px;
+}
+
+/* 还原 Snark 主题原生布局，无未定义变量 */
+.h-wrapper {
+  float: left;
+  width: 240px !important; /* Snark 主题默认侧边栏宽度，替换未定义变量 */
+  padding-right: 0 !important;
+}
+
+.l-content {
+  padding-left: 240px !important; /* 匹配侧边栏宽度，还原原生布局 */
+  margin: 0 !important;
+}
+
+.l-post.l-post-art {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+.p-header {
+  margin-bottom: 1.5em !important; /* 还原 Snark 标题下方默认间距 */
+}
+
+.p-content {
+  margin-top: 0 !important; /* 还原 Snark 内容上方默认间距 */
+  line-height: 2 !important; /* 还原 Snark 原生行高 */
+}
