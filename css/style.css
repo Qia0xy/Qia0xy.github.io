@@ -41,3 +41,23 @@
   background: rgba(74, 144, 226, 0.15);
   padding-left: 4px;
 }
+
+/* 恢复文章内容区的正常布局 */
+.l-post.l-post-art {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 800px !important; /* 适配主题的文章宽度 */
+  padding: 20px !important;
+  margin: 0 auto !important;
+  background: inherit !important;
+  box-shadow: inherit !important;
+}
+
+/* 恢复文章内容的显示 */
+.p-content {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
