@@ -648,6 +648,7 @@ a, .m-nav a:hover, .l-post .p-desc a:hover, .ttl a:hover, .m-nav .dot, .l-pager 
   z-index: 99;
   box-sizing: border-box;
   margin-right: 20px;
+  display: none !important;
 }
 
 #toc .toc-title {
@@ -690,6 +691,80 @@ a, .m-nav a:hover, .l-post .p-desc a:hover, .ttl a:hover, .m-nav .dot, .l-pager 
 #toc .toc-nav a:hover {
   color: #8cb8f0 !important;
   background: none !important;
+}
+
+/* 自定义目录样式（适配侧边栏，核心样式） */
+.h-wrapper .toc-wrap {
+  padding: 15px 45px !important;
+  margin: 20px 0 !important;
+  background: #1f3140 !important;
+  border-left: 2px solid #0F9FB4 !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  max-width: 290px !important;
+}
+
+/* 自定义目录标题 */
+.toc-title {
+  font-size: 16px !important;
+  color: #CECECE !important;
+  margin-bottom: 15px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  font-weight: 600 !important;
+}
+
+/* 自定义目录列表 */
+#custom-toc {
+  max-height: calc(100vh - 300px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+#custom-toc ul,
+#custom-toc li,
+#custom-toc a {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #b8d4e9 !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  display: block !important;
+}
+
+/* 目录层级缩进 */
+#custom-toc > ul > li {
+  margin: 8px 0 !important;
+  padding-left: 0 !important;
+}
+
+#custom-toc > ul > li > ul {
+  padding-left: 15px !important;
+  margin: 4px 0 !important;
+}
+
+#custom-toc > ul > li > ul > li {
+  margin: 6px 0 !important;
+}
+
+#custom-toc > ul > li > ul > li > ul {
+  padding-left: 15px !important;
+}
+
+/* 目录高亮样式 */
+#custom-toc a.toc-active {
+  color: #0F9FB4 !important;
+  font-weight: 600 !important;
+  background: rgba(74, 144, 226, 0.15) !important;
+  padding-left: 4px !important;
+  border-radius: 2px !important;
+}
+
+/* 目录hover效果 */
+#custom-toc a:hover {
+  color: #0F9FB4 !important;
+  transition: all 0.2s ease !important;
 }
 
 /*----------------------*/
@@ -834,32 +909,7 @@ footer {
   color: #2d4356;
 }
 
-/* 左侧目录核心样式：搜索框下方+固定+不重叠 */
-.toc-wrap {
-  position: fixed !important;
-  top: 200px !important; /* 调整为你的搜索框下方（根据实际高度） */
-  left: 60px !important; /* 调整左侧位置，避开头像 */
-  z-index: 999999 !important;
-  width: 220px !important; /* 适配你的侧边栏宽度 */
-  padding: 15px !important;
-  background: #1f3140 !important;
-  border-left: 2px solid #4a90e2 !important;
-  border-radius: 4px !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-}
-
-/* 目录高亮样式 */
-#custom-toc a.toc-active {
-  color: #4a90e2 !important;
-  font-weight: 600 !important;
-  background: rgba(74, 144, 226, 0.15) !important;
-  padding-left: 4px !important;
-  border-radius: 2px !important;
-}
-
-/* 文章区布局适配 */
+/* 恢复文章区布局（取消多余偏移） */
 .l-post.l-post-art {
-  margin-left: 300px !important; /* 目录宽度+间距，避免遮挡 */
+  margin-left: 0 !important;
 }
