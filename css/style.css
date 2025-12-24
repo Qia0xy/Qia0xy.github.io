@@ -841,116 +841,31 @@ footer {
   color: #2d4356;
 }
 
-/*----------------------*/
-/* 强制固定目录（无视任何父容器样式） */
-/*----------------------*/
+/* 强制固定目录，不依赖模板布局 */
 .toc-wrap {
-  margin: 0 !important;
+  position: fixed !important;
+  top: 100px !important; /* 手动调整为搜索框下方 */
+  left: 50px !important; /* 手动调整左侧位置 */
+  z-index: 999999 !important;
+  width: 280px !important;
   padding: 15px !important;
   background: #1f3140 !important;
-  border-radius: 4px !important;
   border-left: 2px solid #4a90e2 !important;
+  border-radius: 4px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
-  width: 280px !important; /* 固定宽度 */
-  height: calc(100vh - 40px) !important; /* 占满视口高度（减去上下边距） */
-  box-sizing: border-box !important;
-  border: none !important;
-  /* 关键：绝对定位+固定在左侧 */
-  position: absolute !important;
-  top: 20px !important;
-  left: 20px !important;
-  z-index: 9999 !important; /* 最高层级，不被任何元素遮挡 */
-}
-
-#custom-toc {
-  height: calc(100% - 40px) !important; /* 减去标题高度 */
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  background: transparent !important;
-}
-
-.toc-title {
-  color: #ffffff !important;
-  font-size: 16px !important;
-  margin: 0 0 10px 0 !important;
-  padding-bottom: 8px !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  font-weight: 600 !important;
-}
-
-#custom-toc ul,
-#custom-toc li,
-#custom-toc a {
-  list-style: none !important;
   margin: 0 !important;
-  padding: 0 !important;
   box-sizing: border-box !important;
-  color: #b8d4e9 !important;
-  text-decoration: none !important;
-  font-family: inherit !important;
-  font-size: 13px !important;
-  font-weight: 400 !important;
-  background: transparent !important;
-  border: none !important;
-  display: block !important;
 }
 
-/* 层级缩进 */
-#custom-toc > ul > li {
-  padding-left: 0 !important;
-  margin: 8px 0 !important;
-}
-
-#custom-toc > ul > li > ul {
-  padding-left: 15px !important;
-}
-
-#custom-toc > ul > li > ul > li {
-  margin: 6px 0 !important;
-}
-
-#custom-toc > ul > li > ul > li > ul {
-  padding-left: 15px !important;
-}
-
-#custom-toc > ul > li > ul > li > ul > li {
-  margin: 4px 0 !important;
-}
-
-/* 当前位置高亮 */
-#custom-toc a.toc-active {
+/* 强制高亮样式 */
+.toc-active {
   color: #4a90e2 !important;
-  font-weight: 600 !important;
+  font-weight: bold !important;
   background: rgba(74, 144, 226, 0.15) !important;
   padding-left: 4px !important;
-  border-radius: 2px !important;
 }
 
-#custom-toc a:hover {
-  color: #6bb0ff !important;
-  transition: all 0.2s ease !important;
-}
-
-/* 滚动条 */
-#custom-toc::-webkit-scrollbar {
-  width: 6px !important;
-  height: 6px !important;
-}
-
-#custom-toc::-webkit-scrollbar-track {
-  background: #2d4356 !important;
-  border-radius: 3px !important;
-}
-
-#custom-toc::-webkit-scrollbar-thumb {
-  background: #4a90e2 !important;
-  border-radius: 3px !important;
-}
-
-#toc {
-  display: none !important;
-}
-
-:target {
-  scroll-margin-top: 80px !important;
+/* 文章区避开目录，恢复布局 */
+.l-post.l-post-art {
+  margin-left: 350px !important;
 }
